@@ -1,0 +1,7 @@
+.deps/
+node_modules/
+artifacts/
+cache/
+.env
+.env.*
+!.env.example
