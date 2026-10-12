@@ -2,21 +2,13 @@
 pragma solidity ^0.8.24;
 
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
-
-interface IClubPointToken {
-    /// @notice Declares the CPT burn operation used by the NFT contract.
-    /// @param member Address whose CPT will be burned.
-    /// @param amount Amount in token base units (100 CPT = 100 * 10**18).
-    function burnForNFT(address member, uint256 amount) external;
-}
 
 /// @title HKU Drone Club CPT token
 /// @notice CPT transfers are unrestricted. Administrative operations are owner-only.
 contract ClubPointToken is ERC20, Ownable {
-    uint256 public constant INITIAL_CPT = 1_000 ether;
-    uint256 public constant NFT_PRICE = 100 ether;
+    uint256 public constant INITIAL_CPT = 1_000;
+    uint256 public constant NFT_PRICE = 100;
 
     mapping(address => bool) public activeMember;
     mapping(address => bool) public hasWithdrawn;
@@ -35,34 +27,33 @@ contract ClubPointToken is ERC20, Ownable {
         emit MemberRegistered(msg.sender);
     }
 
-    /// @notice Lets the owner set the NFT contract, which is authorized to burn CPT, once only.
+    /// @notice CPT has no fractional units: an amount of 1 represents one CPT.
+    function decimals() public pure override returns (uint8) {
+        return 0;
+    }
+
+    /// @notice Lets the owner set the NFT contract authorized to burn CPT, once only.
     /// @param campusMemo Address of the deployed CampusMemoNFT contract.
     function setCampusMemoContract(address campusMemo) external onlyOwner {
-        // Checks that the NFT contract address has not already been configured
         require(campusMemoContract == address(0), "Campus-Memo already set");
-        // Rejects the zero address as the supplied NFT address
         require(campusMemo != address(0), "Invalid Campus-Memo address");
-
         campusMemoContract = campusMemo;
         emit CampusMemoContractSet(campusMemo);
     }
 
-    /// @notice Registers the caller as active; previously withdrawn members cannot rejoin.
+    /// @notice Registers the caller as active; withdrawn members cannot re-register.
     function registerMember() external {
         require(!activeMember[msg.sender], "Already an active member");
         require(!hasWithdrawn[msg.sender], "Withdrawn members cannot re-register");
-
         activeMember[msg.sender] = true;
         emit MemberRegistered(msg.sender);
     }
 
     /// @notice Burns the caller's entire CPT balance and immediately withdraws them.
-    /// @dev Requires active membership and a positive CPT balance.
     function applyForClubWithdrawal() external {
         require(activeMember[msg.sender], "Not an active member");
         uint256 balance = balanceOf(msg.sender);
         require(balance > 0, "No CPT to burn");
-
         _burn(msg.sender, balance);
         activeMember[msg.sender] = false;
         hasWithdrawn[msg.sender] = true;
@@ -71,24 +62,22 @@ contract ClubPointToken is ERC20, Ownable {
 
     /// @notice Lets the owner create additional CPT for an active member.
     /// @param recipient Active member receiving the newly minted CPT.
-    /// @param amount Positive amount in token base units (1 CPT = 10**18).
+    /// @param amount Positive whole-number amount of CPT.
     function mintCPT(address recipient, uint256 amount) external onlyOwner {
         require(activeMember[recipient], "Recipient is not an active member");
         require(amount > 0, "Amount must be positive");
-
         _mint(recipient, amount);
         emit CPTMinted(recipient, amount);
     }
 
     /// @notice Lets the owner mint CPT rewards for multiple active members in one transaction.
     /// @param recipients Nonempty list of active member addresses.
-    /// @param amounts Positive amounts in token base units, matching recipients by index.
+    /// @param amounts Positive whole-number CPT amounts matching recipients by index.
     function distributeCPT(address[] calldata recipients, uint256[] calldata amounts)
         external onlyOwner
     {
         require(recipients.length == amounts.length, "Array lengths differ");
         require(recipients.length > 0, "Empty distribution");
-
         uint256 totalAmount;
         for (uint256 i = 0; i < recipients.length; i++) {
             require(activeMember[recipients[i]], "Recipient is not an active member");
@@ -103,53 +92,12 @@ contract ClubPointToken is ERC20, Ownable {
     /// @notice Burns 100 CPT from an active member to pay for an NFT.
     /// @dev Only the configured CampusMemoNFT contract may call this function.
     /// @param member Active member whose CPT will be burned.
-    /// @param amount Must equal NFT_PRICE, expressed in token base units.
+    /// @param amount Must equal NFT_PRICE (100 CPT).
     function burnForNFT(address member, uint256 amount) external {
         require(msg.sender == campusMemoContract, "Only Campus-Memo can burn");
         require(activeMember[member], "Not an active member");
         require(amount == NFT_PRICE, "Incorrect NFT price");
         require(balanceOf(member) >= amount, "Insufficient CPT");
         _burn(member, amount);
-    }
-}
-
-/// @title HKU Drone Club Campus-Memo NFTs
-contract CampusMemoNFT is ERC721, Ownable {
-    uint256 public constant MAX_NFT_SUPPLY = 10;
-    IClubPointToken public immutable clubToken;
-    uint256 public totalCampusMemos;
-    string private _campusMemoBaseURI;
-
-    event CampusMemoMinted(address indexed member, uint256 indexed tokenId, uint256 burnedCPT);
-
-    /// @notice Sets the CPT contract, NFT metadata base URI, and deployer as owner.
-    /// @param clubTokenAddress Address of the deployed ClubPointToken contract.
-    /// @param campusMemoBaseURI Metadata URI prefix, such as ipfs://CID/.
-    constructor(address clubTokenAddress, string memory campusMemoBaseURI)
-        ERC721("Campus-Memo", "CAMPUS") Ownable(msg.sender)
-    {
-        require(clubTokenAddress != address(0), "Invalid CPT address");
-
-        clubToken = IClubPointToken(clubTokenAddress);
-        _campusMemoBaseURI = campusMemoBaseURI;
-    }
-
-    /// @notice Burns 100 CPT from the caller and mints one NFT, up to a total of 10.
-    /// @dev The CPT contract checks active membership and sufficient balance.
-    /// @return tokenId ID of the newly minted NFT, numbered from 1 to 10.
-    function mintCampusMemo() external returns (uint256 tokenId) {
-        require(totalCampusMemos < MAX_NFT_SUPPLY, "Campus-Memo supply exhausted");
-        
-        clubToken.burnForNFT(msg.sender, 100 ether);
-        tokenId = totalCampusMemos + 1;
-        totalCampusMemos = tokenId;
-        _safeMint(msg.sender, tokenId);
-        emit CampusMemoMinted(msg.sender, tokenId, 100 ether);
-    }
-
-    /// @dev Supplies the metadata prefix that ERC721 appends each token ID to.
-    /// @return The base URI provided during deployment.
-    function _baseURI() internal view override returns (string memory) {
-        return _campusMemoBaseURI;
     }
 }
