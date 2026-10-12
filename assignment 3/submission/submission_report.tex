@@ -1,0 +1,95 @@
+% Rename this file to: FULL_NAME_UID.tex before submission.
+\documentclass[9pt,a4paper]{article}
+\usepackage[margin=1.45cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{fvextra}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{parskip}
+\setlength{\parskip}{2pt}
+\setlist{nosep,leftmargin=*}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\newcommand{\placeholder}[1]{\textcolor{red}{\textbf{[填入 #1]}}}
+\newcommand{\code}[1]{\texttt{\small #1}}
+\RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines=true, breakanywhere=true}
+
+
+\title{\vspace{-1.2em}\textbf{COMP7610 Introduction to Web3 and Blockchain -- Assignment 3}}
+\author{Name: WONG Pak Hung Philip \\ UID: 3036849206}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-1.8em}
+
+\section*{1. On-chain club system deployment}
+The HKU Drone Club system contains two smart contracts. \code{ClubPointToken} is an ERC-20 token named Club Point Token (symbol \code{CPT}) with zero decimals, so all amounts are whole CPT. \code{CampusMemoNFT} is an ERC-721 collection named Campus-Memo (symbol \code{CAMPUS}) with a maximum supply of 10.
+
+\textbf{Deployment steps in Remix:}
+\begin{enumerate}
+  \item Compile \code{scripts/ClubPointToken.sol} and deploy \code{ClubPointToken} using the selected deployer account. Record the address: \code{\placeholder{0x1e26F4F549ff92eE6C2760de4B0b236A73979DF5}}.
+  \item Compile \code{scripts/CampusMemoNFT.sol}. Deploy \code{CampusMemoNFT} with the CPT address from Step 1 and the metadata base URI: 
+  
+  \begin{verbatim}
+  {
+    "name": "Campus-Memo",
+    "description": "COMP7610 assignment 3 NFT URI",
+    "image": "https://github.com/phpw0929/COMP7610/blob/main/assignment%203/assets/drone_icon.png?raw=true"
+  }
+  \end{verbatim}
+  Then record the address: \code{\placeholder{0x64332ac79b2617a6B5ab2071dd868032dF83214b}}.
+  \item In the deployed CPT contract, call \code{setCampusMemoContract} from the \code{CampusMemoNFT} contract. This one-time owner-only configuration authorizes the contract to burn CPT for NFT purchases.
+  \item Final deployed addresses: 
+  \begin{itemize}
+    \item ClubPointToken = \code{\placeholder{0x1e26F4F549ff92eE6C2760de4B0b236A73979DF5}};
+    \item CampusMemoNFT = \code{\placeholder{0x64332ac79b2617a6B5ab2071dd868032dF83214b}};
+    \item NFT metadata URI = \code{\placeholder{\url{https://gist.githubusercontent.com/phpw0929/24a5edbe6d2a7d4d706b2d6efd3c0546/raw/a7e25fe8baa711d375008dac9c6c17b37a1ffcb3/Campus-Memo_URL.json}}}.
+  \end{itemize}
+\end{enumerate}
+
+\section*{2. Custom function and additional logic}
+\textbf{Custom function -- \code{applyForClubWithdrawal()}}. An active member can withdraw immediately. The function burns the caller's entire CPT balance, sets \code{activeMember} to false, sets \code{hasWithdrawn} to true, and emits \code{ClubWithdrawal} event. A withdrawn member cannot register again or receive rewards.
+
+\textbf{Additional functional logic.} The system also provides: 
+
+\begin{itemize}
+  \item Member registration through \code{registerMember()}; 
+  \item Whole-number CPT transfers using the inherited ERC-20 \code{transfer()}; 
+  \item Owner-only single and batch CPT rewards through \code{mintCPT()} and \code{distributeCPT()};
+  \item Campus-Memo minting. Each NFT costs 100 CPT, which is burned directly, and token IDs run from 1 to 10. NFT transfers use standard ERC-721 behavior. Events record registration, rewards, withdrawal, contract linking, and NFT minting.
+\end{itemize}
+
+\section*{3. Function testing summary}
+All tests were performed in Remix after deploying both contracts. CPT amounts below are displayed directly as whole CPT because \code{decimals()} returns 0.
+
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.27\linewidth} p{0.67\linewidth}}
+\textbf{Test} & \textbf{Action and observed result} \\\hline
+Initial state & \textbf{Passed}. Confirmed name, symbol, zero decimals, 1,000 CPT total supply, 1,000 CPT assigned to the deployer, and deployer active status. . \\
+Contract linking & \textbf{Passed}. Owner successfully called \code{setCampusMemoContract}, which links the two contracts; a second call is reverted because the address can be set only once. \\
+Registration & \textbf{Passed}. A new account successfully called \code{registerMember}; repeated registration is reverted.  \\
+Owner minting & \textbf{Passed}. Owner minted 200 CPT to a member; balance and total supply increased correctly. A non-owner mint attempt is reverted. \\
+CPT transfer & \textbf{Passed}. A member transferred 50 CPT. Sender and recipient balances changed by 50; transfers used integer CPT values. An over-balance transfer is reverted.  \\
+Batch rewards & \textbf{Passed}. Owner distributed 10 CPT and 30 CPT to two active members in one batch. The operation is reverted when the CPT value array-length mismatch with the member array-length.  \\
+NFT minting & \textbf{Passed}. An eligible member minted a Campus-Memo with token ID 1. Exactly 100 CPT was burned; \code{ownerOf(1)} returned the minter and \code{tokenURI(1)} returned the expected metadata URI.  \\
+NFT restrictions & \textbf{Passed}. An account with less than 100 CPT could not mint. After token IDs 1--10 were minted, an additional mint is reverted with error message 'supply exhausted'. \\
+Withdrawal & \textbf{Passed}. An active member withdrew; the entire CPT balance became zero, membership became inactive, and \code{hasWithdrawn} became true. Re-registration and further NFT minting is reverted.  \\
+NFT transfer & \textbf{Passed}. The NFT owner transferred the Campus-Memo of token 1 to another account. As expected, \code{ownerOf(1)} changed while CPT balances were unchanged.  \\
+\end{tabular}
+
+\section*{4. Submission details}
+\begin{tabular}{@{}ll}
+Student name and UID: & WONG Pak Hung Philip (3036849206)\\
+ClubPointToken address: & 0x1e26F4F549ff92eE6C2760de4B0b236A73979DF5\\
+CampusMemoNFT address: & 0x64332ac79b2617a6B5ab2071dd868032dF83214b\\
+NFT base/token URI: & \url{https://gist.githubusercontent.com/phpw0929/24a5edbe6d2a7d4d706b2d6efd3c0546/raw/a7e25fe8baa711d375008dac9c6c17b37a1ffcb3/Campus-Memo_URL.json}\\
+Network & Sepolia testnet\\
+Deployment date & 11/10/2026\\
+\end{tabular}
+
+\vfill
+\footnotesize\textit{The source code is submitted separately as \code{ClubPointToken.sol} and \code{CampusMemoNFT.sol}. Replace every red placeholder and rename this file to the required full-name/UID filename before submission.}
+\end{document}
