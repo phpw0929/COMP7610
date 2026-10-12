@@ -1,28 +1,64 @@
-REMIX DEFAULT WORKSPACE
+HKU Drone Club Smart Contracts
+COMP7610 Assignment 3
 
-Remix default workspace is present when:
-i. Remix loads for the very first time 
-ii. A new workspace is created with 'Default' template
-iii. There are no files existing in the File Explorer
+This folder contains the Solidity contracts and project files for the HKU Drone
+Club on-chain system.
 
-This workspace contains 3 directories:
+FOLDER GUIDE
 
-1. 'contracts': Holds three contracts with increasing levels of complexity.
-2. 'scripts': Contains four typescript files to deploy a contract. It is explained below.
-3. 'tests': Contains one Solidity test file for 'Ballot' contract & one JS test file for 'Storage' contract.
+scripts/
+  ClubPointToken.sol    CPT ERC-20 token contract.
+  CampusMemoNFT.sol     Campus-Memo ERC-721 NFT contract.
 
-SCRIPTS
+artifacts/
+  Compiled contract files produced by Remix or Hardhat.
 
-The 'scripts' folder has two typescript files which help to deploy the 'Storage' contract using 'ethers.js' libraries.
+assets/
+  Images used by the project or report.
 
-For the deployment of any other contract, just update the contract name from 'Storage' to the desired contract and provide constructor arguments accordingly 
-in the file `deploy_with_ethers.ts`
+contracts/ and tests/
+  Remix workspace folders. They may be empty because the source contracts
+  and testing work are stored in scripts/ and the report.
 
-In the 'tests' folder there is a script containing Mocha-Chai unit tests for 'Storage' contract.
+DEPLOYMENT IN REMIX
 
-To run a script, right click on file name in the file explorer and click 'Run'. Remember, Solidity file must already be compiled.
-Output from script will appear in remix terminal.
+1. Open the workspace in Remix and compile scripts/ClubPointToken.sol.
+2. Select ClubPointToken in the Contract dropdown and deploy it. It has no
+   constructor arguments. Copy the deployed CPT contract address.
+3. Compile scripts/CampusMemoNFT.sol.
+4. Select CampusMemoNFT and deploy it with two constructor arguments:
+   - clubTokenAddress: the deployed ClubPointToken address.
+   - campusMemoBaseURI: the metadata base URI, for example ipfs://CID/.
+5. Copy the deployed CampusMemoNFT address.
+6. Open the deployed ClubPointToken and call
+   setCampusMemoContract(CampusMemoNFT address).
+   Use the CPT deployer account because this function is owner-only.
 
-Please note, require/import is supported in a limited manner for Remix supported modules.
-For now, modules supported by Remix are ethers, swarmgw, chai, multihashes, remix and hardhat only for hardhat.ethers object/plugin.
-For unsupported modules, an error like this will be thrown: '<module_name> module require is not supported by Remix IDE' will be shown.
+The contracts must be deployed in this order. The NFT contract cannot be
+deployed until the CPT address is known.
+
+MAIN FUNCTIONS
+
+- registerMember(): register an address as an active club member.
+- mintCPT(address, amount): owner-only CPT reward for one active member.
+- distributeCPT(address[], uint256[]): owner-only batch CPT rewards.
+- transfer(address, amount): standard ERC-20 CPT transfer. Amounts are whole
+  CPT because the token has zero decimals.
+- applyForClubWithdrawal(): burn the caller's entire CPT balance and mark the
+  caller as withdrawn.
+- mintCampusMemo(): burn 100 CPT and mint one Campus-Memo NFT. The collection
+  has a maximum supply of 10 NFTs.
+
+TESTING CHECKLIST
+
+After deployment, test the following in Remix:
+
+1. Confirm the initial supply and deployer's balance are both 1,000 CPT.
+2. Register members and verify activeMember(address) is true.
+3. Mint and transfer whole-number CPT amounts, such as 200 and 50.
+4. Mint an NFT and verify that 100 CPT is burned and token ID 1 is owned by
+   the minter.
+5. Call tokenURI(1) and open the returned metadata URI to check the image.
+6. Test withdrawal and verify that the member's CPT balance becomes zero.
+7. Test failure cases, including non-owner minting, insufficient CPT, and an
+   eleventh NFT mint.
