@@ -1,0 +1,1277 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "activityId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "issuer",
+						"type": "address"
+					}
+				],
+				"name": "ActivityClosed",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "activityId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "issuer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					}
+				],
+				"name": "ActivityCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "organizationId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "wallet",
+						"type": "address"
+					}
+				],
+				"name": "OrganizationRegistered",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "organizationId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "wallet",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "changedBy",
+						"type": "address"
+					}
+				],
+				"name": "OrganizationStatusChanged",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "claimId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum VolunteerHoursRegistry.ClaimStatus",
+						"name": "status",
+						"type": "uint8"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "reviewer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "approvedMinutes",
+						"type": "uint32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "recordId",
+						"type": "uint256"
+					}
+				],
+				"name": "ServiceClaimReviewed",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "claimId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "activityId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "volunteer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "claimedMinutes",
+						"type": "uint32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint64",
+						"name": "serviceDate",
+						"type": "uint64"
+					}
+				],
+				"name": "ServiceClaimSubmitted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "oldRecordId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "replacementRecordId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "changedBy",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "reasonHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ServiceRecordCorrected",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "recordId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "activityId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "volunteer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "issuer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "approvedMinutes",
+						"type": "uint32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint64",
+						"name": "serviceDate",
+						"type": "uint64"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "replacesRecordId",
+						"type": "uint256"
+					}
+				],
+				"name": "ServiceRecordIssued",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "recordId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "changedBy",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "reasonHash",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint64",
+						"name": "changedAt",
+						"type": "uint64"
+					}
+				],
+				"name": "ServiceRecordRevoked",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "activityCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "administrator",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "claimId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint32",
+						"name": "approvedMinutes",
+						"type": "uint32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "reviewNoteHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "approveClaim",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "recordId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "claimCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "activityId",
+						"type": "uint256"
+					}
+				],
+				"name": "closeActivity",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "recordId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint32",
+						"name": "correctedMinutes",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint64",
+						"name": "correctedServiceDate",
+						"type": "uint64"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "reasonHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "correctRecord",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "replacementRecordId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "metadataURI",
+						"type": "string"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "metadataHash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					},
+					{
+						"internalType": "uint64",
+						"name": "serviceStartDate",
+						"type": "uint64"
+					},
+					{
+						"internalType": "uint64",
+						"name": "serviceEndDate",
+						"type": "uint64"
+					}
+				],
+				"name": "createActivity",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "activityId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "activityId",
+						"type": "uint256"
+					}
+				],
+				"name": "getActivity",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "issuer",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "metadataURI",
+								"type": "string"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "metadataHash",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "string",
+								"name": "category",
+								"type": "string"
+							},
+							{
+								"internalType": "uint64",
+								"name": "serviceStartDate",
+								"type": "uint64"
+							},
+							{
+								"internalType": "uint64",
+								"name": "serviceEndDate",
+								"type": "uint64"
+							},
+							{
+								"internalType": "bool",
+								"name": "open",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint64",
+								"name": "createdAt",
+								"type": "uint64"
+							}
+						],
+						"internalType": "struct VolunteerHoursRegistry.Activity",
+						"name": "activity",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "activityId",
+						"type": "uint256"
+					}
+				],
+				"name": "getActivityClaimIds",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "claimIds",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "claimId",
+						"type": "uint256"
+					}
+				],
+				"name": "getClaim",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "activityId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "volunteer",
+								"type": "address"
+							},
+							{
+								"internalType": "uint32",
+								"name": "claimedMinutes",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint64",
+								"name": "serviceDate",
+								"type": "uint64"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "supportingInfoHash",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "enum VolunteerHoursRegistry.ClaimStatus",
+								"name": "status",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint64",
+								"name": "submittedAt",
+								"type": "uint64"
+							},
+							{
+								"internalType": "uint64",
+								"name": "reviewedAt",
+								"type": "uint64"
+							},
+							{
+								"internalType": "address",
+								"name": "reviewer",
+								"type": "address"
+							},
+							{
+								"internalType": "uint32",
+								"name": "approvedMinutes",
+								"type": "uint32"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "reviewNoteHash",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "uint256",
+								"name": "recordId",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct VolunteerHoursRegistry.Claim",
+						"name": "claim",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "issuer",
+						"type": "address"
+					}
+				],
+				"name": "getIssuerRecordIds",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "serviceRecordIds",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "wallet",
+						"type": "address"
+					}
+				],
+				"name": "getOrganization",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "wallet",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "metadataURI",
+								"type": "string"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "metadataHash",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "bool",
+								"name": "active",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint64",
+								"name": "registeredAt",
+								"type": "uint64"
+							}
+						],
+						"internalType": "struct VolunteerHoursRegistry.Organization",
+						"name": "organization",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "issuer",
+						"type": "address"
+					}
+				],
+				"name": "getOrganizationActivityIds",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "activityIds",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "organizationId",
+						"type": "uint256"
+					}
+				],
+				"name": "getOrganizationById",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "wallet",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "metadataURI",
+								"type": "string"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "metadataHash",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "bool",
+								"name": "active",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint64",
+								"name": "registeredAt",
+								"type": "uint64"
+							}
+						],
+						"internalType": "struct VolunteerHoursRegistry.Organization",
+						"name": "organization",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "recordId",
+						"type": "uint256"
+					}
+				],
+				"name": "getServiceRecord",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "claimId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "volunteer",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "issuer",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "activityId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint32",
+								"name": "approvedMinutes",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint64",
+								"name": "serviceDate",
+								"type": "uint64"
+							},
+							{
+								"internalType": "uint64",
+								"name": "issuedAt",
+								"type": "uint64"
+							},
+							{
+								"internalType": "enum VolunteerHoursRegistry.RecordStatus",
+								"name": "status",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint256",
+								"name": "replacesRecordId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "replacementRecordId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint64",
+								"name": "statusChangedAt",
+								"type": "uint64"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "reasonHash",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "supportingInfoHash",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "reviewNoteHash",
+								"type": "bytes32"
+							}
+						],
+						"internalType": "struct VolunteerHoursRegistry.ServiceRecord",
+						"name": "serviceRecord",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "volunteer",
+						"type": "address"
+					}
+				],
+				"name": "getVolunteerHistory",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "claimIds",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "serviceRecordIds",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "organizationCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "recordCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "wallet",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "metadataURI",
+						"type": "string"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "metadataHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "registerOrganization",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "organizationId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "claimId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "reasonHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "rejectClaim",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "recordId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "reasonHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "revokeRecord",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "wallet",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"name": "setOrganizationActive",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "activityId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint32",
+						"name": "claimedMinutes",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint64",
+						"name": "serviceDate",
+						"type": "uint64"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "supportingInfoHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "submitServiceClaim",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "claimId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Wallet addresses and all stored data are public. Do not submit personal details or secrets.      Metadata and reason hashes should be keccak256 hashes of the exact off-chain content;      a hash can check matching content but does not prove that the content is true.",
+			"kind": "dev",
+			"methods": {
+				"approveClaim(uint256,uint32,bytes32)": {
+					"details": "The organization may approve fewer or more minutes than claimed; both values remain recorded.",
+					"params": {
+						"approvedMinutes": "Approved duration in whole minutes (60 minutes = 1 hour).",
+						"claimId": "Pending claim to approve.",
+						"reviewNoteHash": "Optional hash of off-chain review notes."
+					},
+					"returns": {
+						"recordId": "Newly issued service record identifier."
+					}
+				},
+				"closeActivity(uint256)": {
+					"details": "Pending claims remain reviewable by the active issuing organization.",
+					"params": {
+						"activityId": "Activity to close."
+					}
+				},
+				"correctRecord(uint256,uint32,uint64,bytes32)": {
+					"details": "The replacement keeps the same volunteer, issuer, activity, and claim; only the      approved minutes or service date may change. Use revokeRecord for other errors.",
+					"params": {
+						"correctedMinutes": "Corrected duration in whole minutes; must be positive.",
+						"correctedServiceDate": "Corrected Unix timestamp in seconds, within the activity's date window.",
+						"reasonHash": "Required keccak256 hash of the off-chain correction explanation.",
+						"recordId": "Valid record to correct."
+					},
+					"returns": {
+						"replacementRecordId": "New record ID linked to the corrected original."
+					}
+				},
+				"createActivity(string,bytes32,string,uint64,uint64)": {
+					"details": "The metadata URI and date window cannot be edited; close this activity and create      another one if its published details need to change.",
+					"params": {
+						"category": "Human-readable activity category.",
+						"metadataHash": "keccak256 hash of the exact activity metadata bytes fetched from metadataURI.",
+						"metadataURI": "Public off-chain activity details location.",
+						"serviceEndDate": "Inclusive end of the service window, as a Unix timestamp in seconds.",
+						"serviceStartDate": "Inclusive start of the service window, as a Unix timestamp in seconds."
+					},
+					"returns": {
+						"activityId": "New activity identifier, starting at 1."
+					}
+				},
+				"getActivity(uint256)": {
+					"params": {
+						"activityId": "Activity identifier."
+					},
+					"returns": {
+						"activity": "The activity record."
+					}
+				},
+				"getActivityClaimIds(uint256)": {
+					"params": {
+						"activityId": "Activity whose claims should be returned."
+					},
+					"returns": {
+						"claimIds": "Claim IDs, including pending, approved, and rejected claims."
+					}
+				},
+				"getClaim(uint256)": {
+					"params": {
+						"claimId": "Claim identifier."
+					},
+					"returns": {
+						"claim": "The public claim record."
+					}
+				},
+				"getIssuerRecordIds(address)": {
+					"params": {
+						"issuer": "Organization wallet whose records should be returned."
+					},
+					"returns": {
+						"serviceRecordIds": "Record IDs issued by the organization."
+					}
+				},
+				"getOrganization(address)": {
+					"params": {
+						"wallet": "Registered organization wallet."
+					},
+					"returns": {
+						"organization": "The public organization record."
+					}
+				},
+				"getOrganizationActivityIds(address)": {
+					"params": {
+						"issuer": "Organization wallet whose activities should be returned."
+					},
+					"returns": {
+						"activityIds": "Activity IDs, including open and closed activities."
+					}
+				},
+				"getOrganizationById(uint256)": {
+					"params": {
+						"organizationId": "Organization identifier returned at registration."
+					},
+					"returns": {
+						"organization": "The public organization record."
+					}
+				},
+				"getServiceRecord(uint256)": {
+					"params": {
+						"recordId": "Record identifier to verify."
+					},
+					"returns": {
+						"serviceRecord": "The public record and its current validity/correction links."
+					}
+				},
+				"getVolunteerHistory(address)": {
+					"details": "The lookup is public because blockchain state and activity are publicly observable.",
+					"params": {
+						"volunteer": "Wallet whose history should be returned."
+					},
+					"returns": {
+						"claimIds": "Claim IDs, including pending and rejected claims.",
+						"serviceRecordIds": "Issued record IDs, including revoked and replaced records."
+					}
+				},
+				"registerOrganization(address,string,bytes32)": {
+					"params": {
+						"metadataHash": "keccak256 hash of the exact metadata bytes fetched from metadataURI.",
+						"metadataURI": "Public off-chain organization metadata location.",
+						"wallet": "Organization wallet that will create activities and review claims."
+					},
+					"returns": {
+						"organizationId": "New organization identifier, starting at 1."
+					}
+				},
+				"rejectClaim(uint256,bytes32)": {
+					"params": {
+						"claimId": "Pending claim to reject.",
+						"reasonHash": "Required keccak256 hash of the off-chain rejection reason; keep personal details off-chain."
+					}
+				},
+				"revokeRecord(uint256,bytes32)": {
+					"params": {
+						"reasonHash": "Required keccak256 hash of the off-chain revocation reason.",
+						"recordId": "Record to revoke."
+					}
+				},
+				"setOrganizationActive(address,bool)": {
+					"details": "Deactivation blocks new activity, claim, review, revocation, and correction actions;      it does not change the status of records already issued.",
+					"params": {
+						"active": "Whether the organization should be allowed to perform new actions.",
+						"wallet": "Wallet of the registered organization."
+					}
+				},
+				"submitServiceClaim(uint256,uint32,uint64,bytes32)": {
+					"details": "Multiple claims per activity are allowed; the application should avoid accidental duplicates.",
+					"params": {
+						"activityId": "Open activity being claimed.",
+						"claimedMinutes": "Claimed duration in whole minutes (60 minutes = 1 hour).",
+						"serviceDate": "Service date as a Unix timestamp in seconds; use UTC midnight for date-only input.",
+						"supportingInfoHash": "Optional keccak256 hash of off-chain supporting information; do not store personal data here."
+					},
+					"returns": {
+						"claimId": "New claim identifier, starting at 1."
+					}
+				}
+			},
+			"title": "Volunteer Hours Registry",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"approveClaim(uint256,uint32,bytes32)": {
+					"notice": "Approves a pending claim and creates its service record in the same transaction."
+				},
+				"closeActivity(uint256)": {
+					"notice": "Closes an activity so volunteers cannot submit new claims for it."
+				},
+				"constructor": {
+					"notice": "Sets the deploying wallet as the platform administrator."
+				},
+				"correctRecord(uint256,uint32,uint64,bytes32)": {
+					"notice": "Corrects an immutable record by invalidating it and issuing a linked replacement."
+				},
+				"createActivity(string,bytes32,string,uint64,uint64)": {
+					"notice": "Creates an activity with immutable public details and a service-date window."
+				},
+				"getActivity(uint256)": {
+					"notice": "Returns the public details and current submission status of an activity."
+				},
+				"getActivityClaimIds(uint256)": {
+					"notice": "Returns all claim IDs submitted against an activity."
+				},
+				"getClaim(uint256)": {
+					"notice": "Returns a claim and its review outcome."
+				},
+				"getIssuerRecordIds(address)": {
+					"notice": "Returns all issued record IDs for an organization, including replaced records."
+				},
+				"getOrganization(address)": {
+					"notice": "Returns organization details by wallet address."
+				},
+				"getOrganizationActivityIds(address)": {
+					"notice": "Returns all activity IDs created by an organization wallet."
+				},
+				"getOrganizationById(uint256)": {
+					"notice": "Returns organization details by sequential organization identifier."
+				},
+				"getServiceRecord(uint256)": {
+					"notice": "Returns a service record for volunteer history or public verification."
+				},
+				"getVolunteerHistory(address)": {
+					"notice": "Returns all claim and service-record IDs indexed for a volunteer wallet."
+				},
+				"registerOrganization(address,string,bytes32)": {
+					"notice": "Registers a recognized issuing organization."
+				},
+				"rejectClaim(uint256,bytes32)": {
+					"notice": "Rejects a pending claim without creating a service record."
+				},
+				"revokeRecord(uint256,bytes32)": {
+					"notice": "Revokes a currently valid service record without deleting its history."
+				},
+				"setOrganizationActive(address,bool)": {
+					"notice": "Activates or deactivates an already registered organization."
+				},
+				"submitServiceClaim(uint256,uint32,uint64,bytes32)": {
+					"notice": "Submits a pending claim for service performed by the caller's wallet."
+				}
+			},
+			"notice": "Records organization-approved volunteer service claims and preserves corrections.",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"dapp/contracts/VolunteerHoursRegistry.sol": "VolunteerHoursRegistry"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"dapp/contracts/VolunteerHoursRegistry.sol": {
+			"keccak256": "0xb84328e471c1b6e12d38a79ab569996246ff1cf20d2763673c31514fcf7dcf7f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://878f2847a5ebe58be6bf49a15f7343492f55a4c388f3c04a2380e683bac2b2ee",
+				"dweb:/ipfs/QmXBnwjuML9HMc1tfEGYZKBc23VUM5JiVWVmkkzvi323RL"
+			]
+		}
+	},
+	"version": 1
+}
