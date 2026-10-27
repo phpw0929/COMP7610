@@ -42,7 +42,7 @@ Remix uses:
 - Orange buttons for read-only calls that do not require gas.
 - Account switching through the Remix account dropdown and MetaMask.
 
-**Status values**
+### **Status values**
 
 Claim status:
 
@@ -53,7 +53,7 @@ Claim status:
 | 2     | Approved |
 | 3     | Rejected |
 
-Record status:
+### Record status:
 
 | Value | Meaning   |
 | ----- | --------- |
@@ -62,7 +62,7 @@ Record status:
 | 2     | Revoked   |
 | 3     | Corrected |
 
-**Useful test values**
+### **Useful test values**
 
 Use these timestamps:
 
@@ -96,6 +96,71 @@ For optional hash inputs, use:
 ```
 0x0000000000000000000000000000000000000000000000000000000000000000
 ```
+
+### Output of functions
+
+`registerOrganization(...)`: 
+
+| Position | Field                  | Example                        |
+| -------- | ---------------------- | ------------------------------ |
+| 1        | Organization ID        | `1`                            |
+| 2        | Organization wallet    | `0xff4e...e94599`              |
+| 3        | Metadata URI           | `https://example.org/org.json` |
+| 4        | Metadata hash          | `0xff2fe0...15aec3`            |
+| 5        | Active status          | `true`                         |
+| 6        | Registration timestamp | `1793118672`                   |
+
+`getActivity(...)`: 
+
+| Position | Field              | Example                               | Meaning                            |
+| -------- | ------------------ | ------------------------------------- | ---------------------------------- |
+| 1        | `id`               | `1`                                   | Activity ID is `1`                 |
+| 2        | `issuer`           | `0xff4e...e94599`                     | Account 2 created the activity     |
+| 3        | `metadataURI`      | `https://example.org/activity-1.json` | Activity metadata location         |
+| 4        | `metadataHash`     | `0xc0beb4...f88f5f4`                  | Metadata content hash              |
+| 5        | `category`         | `Community service`                   | Activity category                  |
+| 6        | `serviceStartDate` | `1767225600`                          | 2026-01-01 00:00 UTC               |
+| 7        | `serviceEndDate`   | `1798761600`                          | 2027-01-01 00:00 UTC               |
+| 8        | `open`             | `true`                                | Volunteers can submit claims       |
+| 9        | `createdAt`        | `1793119320`                          | Approximately 2026-10-27 16:42 UTC |
+
+`getClaim(...)`:
+
+| Position | Field                | Example           | Meaning                                     |
+| -------- | -------------------- | ----------------- | ------------------------------------------- |
+| 1        | `id`                 | `1`               | Claim ID is `1`                             |
+| 2        | `activityId`         | `1`               | Claim refers to activity `1`                |
+| 3        | `volunteer`          | `0xAf58...7c01B3` | Account 3 submitted the claim               |
+| 4        | `claimedMinutes`     | `120`             | Volunteer claimed 120 minutes, or 2 hours   |
+| 5        | `serviceDate`        | `1792886400`      | 2026-10-25 00:00 UTC                        |
+| 6        | `supportingInfoHash` | All zeros         | No supporting-information hash was provided |
+| 7        | `status`             | `1`               | `Pending`                                   |
+| 8        | `submittedAt`        | `1793119620`      | Approximately 2026-10-27 16:47 UTC          |
+| 9        | `reviewedAt`         | `0`               | Not reviewed yet                            |
+| 10       | `reviewer`           | Zero address      | No reviewer yet                             |
+| 11       | `approvedMinutes`    | `0`               | No approved duration yet                    |
+| 12       | `reviewNoteHash`     | All zeros         | No review note yet                          |
+| 13       | `recordId`           | `0`               | No service record has been created yet      |
+
+`getServiceRecord(...)`:
+
+| Position | Field                 | Example           | Meaning                            |
+| -------- | --------------------- | ----------------- | ---------------------------------- |
+| 1        | `id`                  | `1`               | Service record ID is `1`           |
+| 2        | `claimId`             | `1`               | Created from claim `1`             |
+| 3        | `volunteer`           | `0xAf58...7c01B3` | Account 3                          |
+| 4        | `issuer`              | `0xff4e...e94599` | Account 2                          |
+| 5        | `activityId`          | `1`               | Related to activity `1`            |
+| 6        | `approvedMinutes`     | `90`              | Organization approved 90 minutes   |
+| 7        | `serviceDate`         | `1792886400`      | 2026-10-25 00:00 UTC               |
+| 8        | `issuedAt`            | `1793120100`      | Approximately 2026-10-27 16:55 UTC |
+| 9        | `status`              | `1`               | `Valid`                            |
+| 10       | `replacesRecordId`    | `0`               | This is not a replacement record   |
+| 11       | `replacementRecordId` | `0`               | No correction exists yet           |
+| 12       | `statusChangedAt`     | `0`               | No later status change             |
+| 13       | `reasonHash`          | All zeros         | No revocation or correction reason |
+| 14       | `supportingInfoHash`  | All zeros         | No supporting-information hash     |
+| 15       | `reviewNoteHash`      | All zeros         | No review-note hash                |
 
 ## **2. Test organization registration**
 
