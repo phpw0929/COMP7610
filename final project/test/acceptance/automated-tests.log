@@ -1,0 +1,38 @@
+
+> volunteer-hours-registry-dapp@1.0.0 test
+> node --test test/*.test.js
+
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+This version of µWS is not compatible with your Node.js build:
+
+Error: Cannot find module '../binaries/uws_darwin_arm64_137.node'
+Require stack:
+- /Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/dapp/node_modules/ganache/node_modules/@trufflesuite/uws-js-unofficial/src/uws.js
+- /Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/dapp/node_modules/ganache/dist/node/core.js
+Falling back to a NodeJS implementation; performance may be degraded.
+
+
+▶ real Solidity local-EVM workflow, permissions and immutable correction history
+  ✔ M1: only administrator registers a nonzero-hash organization (110.156041ms)
+  ✔ M2/M3: active issuer creates activity; volunteer submits positive, in-window minutes (199.397458ms)
+  ✔ M4/M5: only issuer reviews once; approval issues a real record with adjusted minutes (166.969916ms)
+  ✔ M4/M6/M7: rejection creates no record; public history and verification require no signer (226.808167ms)
+  ✔ M8: multi-step corrections retain facts and backlinks; revocation preserves old records (377.468167ms)
+  ✔ closed activity permits existing pending review; deactivated issuer cannot act; admin can correct (459.509792ms)
+✔ real Solidity local-EVM workflow, permissions and immutable correction history (2199.113167ms)
+✔ IDs retain precision and reject invalid uint256 values (0.574458ms)
+✔ minutes enforce the contract uint32 range without rounding (0.095292ms)
+✔ UTC dates round-trip including leap-day and epoch (1.121291ms)
+✔ required reasons and optional notes have different zero-hash rules (1.003791ms)
+✔ metadata hashes raw bytes, distinguishes schema/hash/transport errors (3.917292ms)
+✔ metadata permits loopback HTTP only with explicit local-test permission (0.429833ms)
+✔ list reads preserve successes and identify partial failures (0.671208ms)
+✔ wallet cancellation and contract errors remain meaningful (0.146542ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2919.336

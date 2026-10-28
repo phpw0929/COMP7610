@@ -1,201 +1,91 @@
-# DApp Template Folder Guide
+# DApp Folder and Implementation Guide
 
-This guide describes what the supplied DApp template should look like before and after the project is implemented. The current stage is idea and design, so the files should be understood before they are changed.
+Updated: 2026-10-28. The VolunteerHoursRegistry contract and integration ABI exist. The business frontend is implemented and builds successfully; local-EVM acceptance and real Sepolia reads have passed. Final signed testnet acceptance remains pending. This guide describes the current source and planned additions; it does not certify deployment or completion.
 
-## 1. Final folder structure
+## 1. Current and planned files
 
-The final source folder should normally look like this:
+Paths below are relative to `final project/`. `planned` entries do not exist yet.
 
 ```text
+AGENTS.md                         Project workflow rules
+README.md                         Current status and setup
+.codex/context.md                 Scope and latest handoff context
+doc/
+  plan.md                         Product definition and eight-feature scope
+  execution_plan.md               Stages G0-G7, tests T01-T14, delivery plan
+  plan_review_2026-10-28.md        Feasibility and course-requirements review
+  guide.md                        This guide
+  Final Project.pdf               Formal coursework brief
+  Project Tutorial.pdf            Technical tutorial
+  DApp_idea.xlsx                  Earlier idea comparison
+handoff/
+  frontend_handoff.md             Contract function and data reference
+  integration_status.md           Real dependencies, milestones and evidence
+  merge_protocol.md               Contract/frontend ownership and safe integration
+  repository_review_2026-10-28.md  Initial repository inspection snapshot
+test/
+  test_overview.md                 Historical manual coverage table
+  test_procedure.md                Remix test procedure and expected values
+  acceptance/                     Actual local/testnet-read evidence and browser report
 dapp/
-├── contracts/
-│   ├── YourMainContract.sol
-│   └── OtherContract.sol          # Optional: add when the DApp needs more than one contract
-├── src/
-│   ├── App.jsx
-│   ├── contract.js
-│   ├── main.jsx
-│   ├── styles.css
-│   └── components/                # Optional: add when App.jsx becomes too large
-│       ├── WalletButton.jsx       # Optional
-│       └── FeaturePanel.jsx       # Optional
-├── .env.example
-├── .gitignore
-├── index.html
-├── package.json
-├── package-lock.json
-└── README.md
+  contracts/VolunteerHoursRegistry.sol
+  artifacts/                      Tracked ABI, metadata and build-info
+  src/
+    contract.js                   Current ABI, address and network constants
+    App.jsx                       Implemented workspaces, forms, history and verification
+    useRegistry.js                Provider, wallet/session and transaction lifecycle
+    main.jsx                      React mount entry
+    styles.css                    Responsive presentation and form styles
+    components/                   optional; not needed in this implementation
+    utils.js                      Shared validated dates, integers, metadata and query helpers
+  public/metadata/                Explicitly fictional demo JSON assets
+  index.html                      Loads the implemented main.jsx
+  package.json                    React/Vite/Ethers; build/dev/preview and development tests
+  package-lock.json               Locked dependency installation
+  .env.example                    Public configuration template
+  .gitignore                      Local/generated exclusions
+submission/                       Report/video drafts, build scripts and manifest
 ```
 
-The starter repository currently contains `contracts/TicketNFT.sol`. If the project idea is different from the tutorial NFT example, replace that contract with the contract or contracts required by the project. The exact contract names depend on the final design.
+The repository-wide document index is `../DOCUMENT_INDEX.md`. Keep it synchronized whenever a document is added, moved or updated. Source files under `assignment 3/` are a separate assignment, not contracts or assets to copy into this DApp.
 
-The local working folder also needs a `.env` file after deployment, but it is intentionally ignored by Git and is not part of the committed final source tree:
+## 2. Runtime relationships
 
-```text
-dapp/.env
-```
+`index.html -> main.jsx -> App.jsx -> feature components` is the React entry path. The entry and business flow have been repaired. The former NFT placeholders and mint flow are removed. A development-only local EIP-1193 harness under dapp/test is excluded from the production build.
 
-## 2. Relationship between the files
+The planned Web3 paths are:
 
-```mermaid
-flowchart LR
-    HTML[index.html] --> MAIN[src/main.jsx]
-    MAIN --> APP[src/App.jsx]
-    APP --> CONFIG[src/contract.js]
-    APP --> Ethers[Ethers.js]
-    Ethers --> Wallet[MetaMask]
-    Wallet <--> Chain[Sepolia testnet]
-    Chain <--> Solidity[contracts/YourMainContract.sol]
-    APP --> CSS[src/styles.css]
-    APP -. transaction link .-> Explorer[Sepolia Etherscan]
-```
+- Read: React -> Ethers JsonRpcProvider -> Sepolia, without requesting a wallet signature.
+- Write: React -> MetaMask/BrowserProvider -> current signer -> existing contract -> transaction receipt/event -> refresh affected state.
+- Metadata: React -> actual public JSON bytes -> compare keccak256 with the on-chain hash -> display verified content or an explicit failure state.
 
-The flow is:
+The contract enforces permissions and state transitions. UI role checks improve usability but cannot replace authorization on-chain. One wallet can have multiple roles.
 
-1. `index.html` provides a `<div id="root">` container.
-2. `src/main.jsx` starts React and mounts `<App />` into that container.
-3. `src/App.jsx` displays the interface and responds to user actions.
-4. `src/App.jsx` imports the contract address and ABI from `src/contract.js`.
-5. Ethers.js connects the React application to MetaMask and the blockchain.
-6. MetaMask provides the user's public account and signs state-changing transactions.
-7. The deployed Solidity contract enforces the business rules and stores blockchain state.
-8. `src/styles.css` controls the appearance of the React interface.
+## 3. Configuration and prerequisites
 
-## 3. What each existing file is used for
+Use the lockfile with `npm ci`. Vite 7 requires Node 20.19+ or 22.12+; Node 24.19.0 was used for the initial inspection. The local default Node 20.11.0 does not satisfy that range.
 
-| File | Role |
-| --- | --- |
-| `contracts/TicketNFT.sol` | Solidity smart contract. It defines the on-chain rules, state variables, and functions. Replace or redesign it for the actual project idea. |
-| `src/App.jsx` | Main React component. It contains the user interface, wallet connection logic, read calls, transaction functions, status messages, and button handlers. |
-| `src/contract.js` | Web3 configuration. It provides deployed contract addresses, ABI definitions, the Sepolia chain ID, and the Sepolia Etherscan URL. |
-| `src/main.jsx` | React entry point. It imports `App` and renders it inside the root element in `index.html`. |
-| `src/styles.css` | CSS used to style the page, cards, buttons, status text, and responsive layout. |
-| `index.html` | Minimal HTML shell. It contains the root element and loads `src/main.jsx`. |
-| `package.json` | Project metadata, npm scripts, and direct dependencies such as React, Vite, and Ethers.js. |
-| `package-lock.json` | Exact dependency versions used by npm. Keep it synchronized when dependencies are changed. |
-| `.env.example` | Safe configuration template. It documents the environment variable name without containing a real deployment address. |
-| `.gitignore` | Lists local, generated, and sensitive files that must not be committed. |
-| `README.md` | Project instructions, deployment steps, architecture explanation, and testing notes. |
+Existing `.env.example` lists address, chain ID/name, explorer and `VITE_READ_RPC_URL`. Public defaults support the observed Sepolia deployment without a local .env. Use .env only to override the final deployment or public endpoint. All VITE variables are public browser configuration. Do not put secrets there.
 
-## 4. Existing files to modify
+The Sepolia network/address/getters have been read from the RPC and browser; the snapshot is in test/acceptance/sepolia-proof.json. The local ABI matches the artifact ABI; build-info source matches the Solidity source. Executable bytecode also matches after excluding immutable slots and compiler metadata, whose full hash differs. This does not recover the deployment transaction or constitute explorer source verification. Artifacts record Solidity 0.8.34, EVM osaka, optimizer disabled; the actual deployment transaction/settings remain to be confirmed.
 
-### `contracts/TicketNFT.sol`
+## 4. Development order and responsibility
 
-Modify the entire contract when the project's idea is different from the ticket example. Define the required data, functions, access rules, events, and validation in Solidity. If the design needs several independent contracts, add separate `.sol` files under `contracts/`.
+Use execution_plan as the single detailed plan: G0 integration prerequisites, G1 runnable shell, G2 read/identity, G3 main workflow, G4 remaining state transitions, G5 acceptance, G6 report/video, G7 final submission. Register actual progress in integration_status. Do not duplicate progress claims in this guide.
 
-### `src/App.jsx`
+Frontend work normally changes App, entry, styles, feature components and small shared helpers. Preserve the existing contract/ABI unless a confirmed defect requires coordinated contract repair and redeployment. Reuse current dependencies; no database, indexer, token or payment system is needed for the agreed demo.
 
-Modify the application logic and interface for the project's features. The placeholder sections in the supplied template must be completed or replaced. Add the functions that connect buttons to contract calls, for example wallet connection, token transfer, NFT purchase, withdrawal, or other project-specific operations.
+Do not create an additional nested Git repository under dapp. The team repository is phpw0929/COMP7610; use simple scoped changes and preserve existing work. Commits/pushes are separate authorized actions, not a consequence of updating this guide.
 
-### `src/contract.js`
+## 5. Generated files and delivery
 
-Change the deployed address and ABI after the Solidity contract is compiled and deployed. The address is normally read from `.env`:
+`node_modules`, Vite caches and build output are generated locally. `.env` is created locally, not generated by Vite. Exclude these from the source submission; retain package-lock and required tracked ABI/build information. Check existing ignore rules before adding new generated or evidence files, because artifacts are globally ignored even though existing artifact files are already tracked.
 
-```javascript
-export const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS ?? "";
-```
+Final delivery includes runnable source and detailed README, a PDF report, and an English high-resolution MP4/MOV demo within 15 minutes. Slides are conditional; individual Peer assignment 04 is separate. Report PDF and English narrated evidence video drafts now exist; final team contribution information and signed Sepolia live-demo footage remain outstanding. See the requirements review and confirm the live course portal before submitting.
 
-Replace the sample ABI entries with the functions and events that the frontend actually calls:
 
-```javascript
-export const CONTRACT_ABI = [
-  "function yourFunction(...) ...",
-  "function yourReadFunction(...) view returns (...) ",
-  "event YourEvent(...)"
-];
-```
+## 6. Test and media tooling
 
-If the DApp uses several contracts, add one address and one ABI for each contract. The ABI is obtained from compilation; the address is obtained from deployment. They do not update automatically unless the team creates a deployment script to update this file.
+Ganache and solc are development-only dependencies for real local-EVM tests; runtime dependencies are unchanged. dapp/scripts/local-chain.mjs deploys unchanged source to an ephemeral local chain and writes ignored test state; npm run dev:local exposes the explicitly labeled test harness on port 5184. Test outputs are not proof of new Sepolia signing.
 
-### `.env.example` and local `.env`
-
-Keep `.env.example` safe and descriptive:
-
-```env
-VITE_CONTRACT_ADDRESS=0xYourDeployedContractAddress
-```
-
-Create `.env` locally and replace the placeholder with the real Sepolia address:
-
-```env
-VITE_CONTRACT_ADDRESS=0x...
-```
-
-For multiple contracts, add variables such as `VITE_CPT_ADDRESS` and `VITE_NFT_ADDRESS`. Do not put private keys, seed phrases, or API secrets in either file.
-
-### `src/styles.css`
-
-Modify the CSS if the DApp needs a different visual design. This file does not change contract behavior.
-
-### `README.md`
-
-Update the project name, feature description, deployment instructions, contract names, and testing steps once the project design is fixed.
-
-### Files that usually need only small changes
-
-- `index.html`: change the page title, description, or other metadata if needed. Keep the root element and `src/main.jsx` script.
-- `package.json`: add a dependency only when the project actually needs a new library. Keep the existing Vite, React, and build scripts unless there is a clear reason to change them.
-- `src/main.jsx`: normally leave it unchanged. Modify it only if the application needs a different entry setup or additional top-level providers.
-- `package-lock.json`: do not edit by hand. Run npm after changing `package.json` so npm updates it.
-- `.gitignore`: change only if a new local or generated file needs to be excluded.
-
-## 5. Files and folders created automatically
-
-These are generated during normal development and do not need to be written manually:
-
-| Generated item | Created by | Purpose |
-| --- | --- | --- |
-| `node_modules/` | `npm install` or `npm ci` | Installed JavaScript dependencies. Do not edit or commit it. |
-| `dist/` | `npm run build` | Production static files generated by Vite. Do not edit the source through this folder. |
-| Vite cache files | Vite during development or build | Temporary build information. They are normally covered by the ignore rules. |
-
-`.env` is different: it is not generated automatically by Vite. The team creates it manually by copying `.env.example` and inserting the deployed contract address. It remains local because `.gitignore` excludes it.
-
-The blockchain also creates deployment transactions, transaction receipts, token IDs, and event logs. These are blockchain records, not files that should be added to the project folder.
-
-## 6. Files to add at the final stage
-
-The required final source files are already represented by the template. The project may need these additions depending on its design:
-
-1. **Project-specific Solidity contracts**
-
-   Add new files under `contracts/` when the DApp needs more contracts than the supplied `TicketNFT.sol`, for example:
-
-   ```text
-   contracts/
-   ├── ClubPointToken.sol
-   └── CampusMemoNFT.sol
-   ```
-
-2. **Optional React components**
-
-   Add files under `src/components/` only if splitting `App.jsx` makes the interface easier to maintain.
-
-3. **Optional static assets**
-
-   Add images, icons, or other frontend assets in a clearly named folder such as `src/assets/` if the final interface needs them.
-
-4. **Project documentation**
-
-   Update the existing `README.md`. Add separate documentation files only when the course submission requires them.
-
-Do not add `node_modules/`, `dist/`, or the local `.env` to the submitted source repository.
-
-## 7. Recommended implementation order
-
-Because the project is currently at the idea stage, use this order:
-
-1. Define the DApp's users, features, data, and business rules.
-2. Decide which rules must be enforced on-chain.
-3. Design and implement the Solidity contract or contracts.
-4. Compile and test the contracts in Remix.
-5. Deploy the final contracts to Sepolia and record their addresses.
-6. Update `src/contract.js` and the local `.env` with the addresses and ABIs.
-7. Implement the React features in `src/App.jsx`.
-8. Adjust `src/styles.css` and add components or assets if necessary.
-9. Run `npm run build` and test the complete wallet-to-contract flow on Sepolia.
-10. Commit source files and documentation while leaving generated folders and `.env` ignored.
-
-## 8. Note about the supplied `.git` folder
-
-The `.git` folder inside `final project/dapp` belongs to the template provider, as noted by the team. It should not be treated as the team's remote repository. Do not use it to infer the team's GitHub destination. If the project is later placed in the team's repository, follow the team's agreed repository setup separately and keep the template's source files as the working content.
+submission/build_report.py uses Python/reportlab to regenerate the delivered PDF. build_demo.py uses macOS say and FFmpeg to build the narrated captured-screen draft; playback is portable, but regeneration requires those tools. Temporary render/media folders are ignored. Complete commands, test results and team handoff are in README and merge_protocol.

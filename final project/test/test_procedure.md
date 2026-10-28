@@ -1,4 +1,8 @@
-The contract is ready at [VolunteerHoursRegistry.sol](../dapp/contracts/VolunteerHoursRegistry.sol).
+# VolunteerHoursRegistry Manual Contract Test Procedure
+
+Updated 2026-10-28. Source: [VolunteerHoursRegistry.sol](../dapp/contracts/VolunteerHoursRegistry.sol). These are test steps and expected results, not evidence that this update reran them. Historical marks remain in test_overview; new results require actor/date/commit/network/address and logs/transactions in [integration_status.md](../handoff/integration_status.md). Frontend/E2E cases are T01-T14 in [execution_plan.md](../doc/execution_plan.md).
+
+The compiled artifacts record Solidity 0.8.34, EVM osaka, optimizer disabled. The previous procedure said 0.8.30. Confirm the actual deployment/settings with the contract owner; this documentation correction does not redeploy or establish what compiler produced the live address. Do not redeploy merely to start frontend integration. Steps below include a fresh deployment option for reproducing tests, which generates a separate address and IDs.
 
 Use Remix with four Sepolia accounts:
 
@@ -9,7 +13,7 @@ Use Remix with four Sepolia accounts:
 | Account 3 | Volunteer                    |
 | Account 4 | Unauthorized tester/verifier |
 
-Each account that sends transactions needs Sepolia ETH. Account 4 only performs read calls, so it does not need ETH.
+Every account that actually sends transactions needs Sepolia ETH. Account 4 needs no ETH for read-only calls or simulated unauthorized calls; if it sends unauthorized transactions, it also needs test ETH. Record simulation and mined transaction outcomes separately.
 
 ## **1. Deploy the contract**
 
@@ -17,7 +21,7 @@ Each account that sends transactions needs Sepolia ETH. Account 4 only performs 
 2. In **File Explorers**, create `VolunteerHoursRegistry.sol`.
 3. Paste the complete contract source into the file.
 4. Open **Solidity Compiler**.
-5. Select compiler version **0.8.30**.
+5. To reproduce the checked-in artifacts, select compiler **0.8.34**, EVM target **osaka**, optimizer **disabled**. Before a fresh network deployment, confirm the chosen compiler/target and deployment settings with the contract owner; preserve those settings in the evidence.
 6. Click **Compile VolunteerHoursRegistry.sol**.
 7. Open **Deploy & Run Transactions**.
 8. Set **Environment** to **Injected Provider - MetaMask**.
@@ -36,11 +40,7 @@ After deployment:
 
 If the deployed contract disappears after switching accounts, paste the address into **At Address** and click **At Address**.
 
-Remix uses:
-
-- Blue buttons for transactions that require gas.
-- Orange buttons for read-only calls that do not require gas.
-- Account switching through the Remix account dropdown and MetaMask.
+Identify reads/writes by the ABI and function mutability rather than button colors. `view` getters are read-only; state-changing functions require a signed transaction and gas. UI colors are not the test criterion. Switch accounts through the Remix account dropdown and MetaMask.
 
 ### **Status values**
 
@@ -281,7 +281,7 @@ Each should revert.
 
 ## **5. Test unauthorized review**
 
-Keep Account 4 selected.
+Switch to Account 4 for this unauthorized-review test.
 
 Try:
 
@@ -356,7 +356,7 @@ Expected result:
 
 - `getClaim(2)` shows status `3`, meaning `Rejected`.
 - `recordCount()` remains `1`.
-- `recordId()` remains `0`.
+- The `recordId` field returned by `getClaim(2)` remains `0` (there is no standalone `recordId()` getter).
 - No verified service record is created for claim 2.
 
 **Feature tested:** claim rejection.
@@ -446,7 +446,7 @@ Try correcting or revoking record 2 again. It should revert because only valid r
 
 ## **11. Test closing an activity**
 
-Before deactivating Account 2, use Account 3 create and approve one more claim so that record 3 exists:
+Before deactivating Account 2, use Account 3 to submit one more claim, then Account 2 to approve it, so that record 3 exists:
 
 ```
 submitServiceClaim(
@@ -549,3 +549,9 @@ Organization or administrator corrects/revokes record
 ```
 
 When deploying to Sepolia, save the deployed contract address. The frontend will later need that address and the compiled ABI in `src/contract.js`.
+
+## Evidence and repeatability
+
+The numeric IDs above assume a fresh deployment and the exact call sequence. On an existing deployment, record actual IDs from receipts/events or getters; never assume historical activity 1 is open, issuer Account 2 is active, or record 1 is still valid. Prepare a new demo activity and preserve at least one valid final record. Record all role public addresses; do not record secrets.
+
+For each executed case, save actor/time, commit, chain ID/address, input, expected/actual state, and evidence path. Signed writes need a real tx hash and receipt status; simulated calls need an explicit simulation label. A refused signature or failed estimate is not a mined failed transaction. Frontend acceptance must additionally demonstrate the workflow through the application rather than only Remix.

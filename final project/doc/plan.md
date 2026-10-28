@@ -1,10 +1,12 @@
 # Volunteer Service-Hour Verification DApp
 
+Updated: 2026-10-28. This document defines the product scope. The contract and business frontend are implemented. Automated tests and local-EVM browser acceptance have passed; real Sepolia reads are confirmed. A fresh signed Sepolia UI workflow and final coursework submission are still pending. See [execution_plan.md](execution_plan.md) for delivery stages and [plan_review_2026-10-28.md](plan_review_2026-10-28.md) for feasibility and coursework coverage. Planning coverage is not implementation completion.
+
 ## 1. Project definition
 
 The DApp is a blockchain-based platform for issuing and verifying volunteer service-hour records.
 
-An approved service organization confirms that a volunteer completed a specified activity for a stated number of hours. The volunteer can view the record and share a verification link. A school, employer, scholarship committee, or other verifier can independently check the record and its current status.
+An approved service organization confirms that a volunteer completed a specified activity for a stated number of minutes. The volunteer can view the record ID. A school, employer, scholarship committee, or other verifier can independently look up that ID and check the record and its current status. Link sharing, QR codes, and summary totals are outside the first version.
 
 The DApp provides a common record system for multiple organizations. Its blockchain value comes from:
 
@@ -23,7 +25,7 @@ The blockchain proves that an authorized organization issued a particular record
 - Opens an activity reference shared by a service organization.
 - Submits a claim for completed service hours.
 - Views personal service records and their statuses.
-- Shares a selected record or verification summary.
+- Reads individual records and their correction links by ID.
 
 ### Service organization
 
@@ -36,7 +38,7 @@ The blockchain proves that an authorized organization issued a particular record
 ### Verifier
 
 - Does not need to submit a transaction.
-- Opens a record through a record ID, link, or QR code.
+- Looks up a record by its ID; the frontend is planned to support read-only access without a connected wallet.
 - Checks the issuer, activity, hours, date, volunteer wallet, and current status.
 
 ### Platform administrator
@@ -45,17 +47,17 @@ The blockchain proves that an authorized organization issued a particular record
 - Deactivates an issuer when necessary.
 - Does not edit approved service records.
 
-## 3. Recommended first-version functions
+## 3. Agreed first-version functions
 
 | Function | Purpose | Main user | Smart-contract implementation logic |
 |---|---|---|---|
 | **Register recognized organization** | Establish which organizations are allowed to issue verified service records. | Platform administrator | Store an organization ID, organization wallet, display metadata reference, and active status. Only the administrator can add, approve, or deactivate an issuer. Emit an organization-status event. |
-| **Create service activity** | Publish a volunteer opportunity that can later be referenced by a service claim. | Service organization | Require an active issuer. Store an activity ID, issuer address, activity metadata reference, service date or date range, category, and active status. Only the creating issuer can update or close its activity. |
-| **Submit service-hour claim** | Let a volunteer request recognition for completed service. | Volunteer | Require the caller to be the volunteer wallet and the activity to exist and be active. Store a claim ID, activity ID, volunteer address, claimed hours, supporting metadata reference, and `Pending` status. Emit a claim-submitted event. |
+| **Create service activity** | Publish a volunteer opportunity that can later be referenced by a service claim. | Service organization | Require an active issuer. Store an activity ID, issuer address, metadata URI/hash, date window, category, and open status. Published details are immutable; only the active creating issuer can close the activity. Create another activity to change details. |
+| **Submit service-hour claim** | Let a volunteer request recognition for completed service. | Volunteer | Use the caller as the volunteer wallet; require an open activity and an active issuing organization. Store a claim ID, activity ID, volunteer address, claimed minutes, service date, optional supporting-information hash, and `Pending` status. Emit a claim-submitted event. |
 | **Approve or reject claim** | Let the responsible organization decide whether the claimed service is valid. | Service organization | Permit review only by the issuer of the referenced activity. A pending claim can become `Approved` or `Rejected`; the decision and reviewer address are recorded. A claim cannot be reviewed twice. |
-| **Create verified service record** | Represent an approved and verifiable service contribution. | Service organization and volunteer | Approval creates or activates a record containing the record ID, volunteer address, issuer address, activity ID, approved hours, service date, issue time, and status. The approved fields cannot be edited in place. Emit a record-issued event. |
+| **Create verified service record** | Represent an approved and verifiable service contribution. | Service organization and volunteer | Approval automatically creates a record in the same transaction, containing the record ID, volunteer address, issuer address, activity ID, approved minutes, service date, issue time, and status. No separate mint/issuance transaction is required. The approved fields cannot be edited in place. Emit a record-issued event. |
 | **View volunteer service history** | Give a volunteer a complete view of personal claims and issued records. | Volunteer | Read records indexed by the connected volunteer address. Display pending, approved, rejected, revoked, and corrected statuses. The contract exposes the data; the frontend provides the history view. |
-| **Publicly verify an individual record** | Allow a third party to check whether a service record is authentic and currently valid. | Verifier | Provide a read-only lookup by record ID. Return the issuer, volunteer wallet, activity, approved hours, issue time, current status, and any linked correction or revocation reference. No verifier transaction is required. |
+| **Publicly verify an individual record** | Allow a third party to check whether a service record is authentic and currently valid. | Verifier | Provide a read-only lookup by record ID. Return the issuer, volunteer wallet, activity, approved minutes, service date, issue time, current status, and any linked correction or revocation reference. No verifier transaction is required. |
 | **Revocation and corrected-record history** | Mark an incorrect record as invalid and issue a traceable replacement without deleting the original history. | Service organization or platform administrator | Permit the issuer, or the administrator for an exceptional case, to change an approved record to `Revoked` or `Corrected`. Store the status-change time, reason reference, and replacement or previous record ID. The original record remains queryable. |
 
 ## 4. Core data model
@@ -84,7 +86,7 @@ The contract should store only the data required for verification and state mana
 - Claim ID
 - Activity ID
 - Volunteer wallet address
-- Claimed hours
+- Claimed minutes (`uint32`, positive integer)
 - Supporting-information reference or hash
 - Claim status
 - Submission and review timestamps
@@ -96,7 +98,7 @@ The contract should store only the data required for verification and state mana
 - Volunteer wallet address
 - Issuing organization address
 - Activity ID
-- Approved hours
+- Approved minutes (`uint32`, positive integer; may differ from claimed minutes)
 - Service date
 - Issue timestamp
 - Current status
@@ -110,16 +112,21 @@ Names, email addresses, phone numbers, photos, GPS traces, uploaded documents, a
 1. Only an active, recognized organization can issue or review service records.
 2. Only the organization that created an activity can review claims for that activity.
 3. A volunteer can submit a claim only for the volunteer’s connected wallet.
-4. Claimed and approved hours must be positive numeric values.
+4. Claimed and approved durations are positive whole minutes (`uint32`); approved minutes may be lower or higher than claimed minutes, with both values retained.
 5. A claim starts as `Pending` and can be reviewed only once in the first version.
 6. Only the responsible organization can approve or reject a pending claim.
 7. Approval creates a verifiable service record; rejection does not create an approved record.
 8. Approved records cannot be edited or deleted in place.
 9. An incorrect record is handled through revocation or a linked corrected record.
-10. Public verification is read-only and does not require a verifier wallet transaction.
+10. Public verification is read-only and does not require a verifier wallet transaction. The planned frontend uses an independent read-only RPC so a verifier does not need to connect a wallet.
 11. A volunteer’s wallet is treated as the account identifier. The DApp does not claim that a wallet address is a legally verified identity.
 12. The contract does not make an independent judgment about whether the volunteer actually attended. The issuing organization is the trusted source for that fact.
 13. The first version does not handle payments, tokens, NFTs, deposits, GPS attendance, photo evidence, background checks, or external institutional databases.
+14. Dates are Unix seconds. Date-only UI inputs use UTC midnight; service dates must be within the immutable activity window and not in the future.
+15. An activity may receive multiple claims from one volunteer. Prevent accidental repeated clicks without introducing a contract-inconsistent one-claim-per-activity rule.
+16. Closing an activity prevents new claims but leaves existing pending claims reviewable by its active issuer. Deactivating an issuer blocks its new business actions without automatically revoking previously issued records; the administrator can still revoke/correct records.
+17. Corrections retain volunteer, issuer, activity and claim; they replace minutes/date through a new linked record. Claim approval status and current record validity are separate.
+18. Organization/activity metadata hashes and rejection/revocation/correction reason hashes must be nonzero. Supporting-information and approval-note hashes may be zero. Metadata integrity is checked against exact content bytes, not reserialized JSON.
 
 ## 6. Main user flow
 
@@ -147,3 +154,5 @@ The demonstration should show:
 - Revocation or correction with preserved history.
 
 The group should implement the smallest reliable workflow first, test each state transition on the testnet, and add presentation features only after the contract rules and verification behavior are stable.
+
+The eight features above are team product scope, not eight teacher grading items. Exclude public activity browsing, share links/QR codes, total-hour summaries, exports and unrelated feature additions. Complete delivery additionally requires the coursework video, report, runnable source/README and individual peer assignment; see the execution plan and course-requirements review.

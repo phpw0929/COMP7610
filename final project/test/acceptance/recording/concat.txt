@@ -1,0 +1,59 @@
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000000.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000001.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000002.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000003.jpg'
+duration 0.08339595794677734
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000004.jpg'
+duration 0.17497611045837402
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000005.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000006.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000007.jpg'
+duration 8
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000008.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000009.jpg'
+duration 0.09102320671081543
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000010.jpg'
+duration 0.2581329345703125
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000011.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000012.jpg'
+duration 0.24924612045288086
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000013.jpg'
+duration 0.5174078941345215
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000014.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000015.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000016.jpg'
+duration 8
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000017.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000018.jpg'
+duration 0.09200406074523926
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000019.jpg'
+duration 0.18281292915344238
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000020.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000021.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000022.jpg'
+duration 8
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000023.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000024.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000025.jpg'
+duration 0.6157729625701904
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000026.jpg'
+duration 0.08331608772277832
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000027.jpg'
+duration 0.08
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000028.jpg'
+duration 2
+file '/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery/final project/test/acceptance/recording/000028.jpg'

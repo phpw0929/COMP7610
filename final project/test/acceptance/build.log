@@ -1,0 +1,13 @@
+
+> volunteer-hours-registry-dapp@1.0.0 build
+> vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 174 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.59 kB │ gzip:   0.37 kB
+dist/assets/index-pcARGJsT.css    6.24 kB │ gzip:   2.09 kB
+dist/assets/index-BYjBb0Oa.js   489.23 kB │ gzip: 165.42 kB
+✓ built in 836ms

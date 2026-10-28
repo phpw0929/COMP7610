@@ -1,0 +1,103 @@
+{
+  "environment": "LOCAL EVM (not Sepolia)",
+  "chainId": 31337,
+  "contract": "0x937859Bdf3c10143053ECf54b99E7e4F83B6290C",
+  "compiler": "0.8.34+commit.80d5c536.Emscripten.clang",
+  "evmTarget": "shanghai",
+  "source": "unchanged VolunteerHoursRegistry.sol",
+  "cases": [
+    "M1: only administrator registers a nonzero-hash organization",
+    "M2/M3: active issuer creates activity; volunteer submits positive, in-window minutes",
+    "M4/M5: only issuer reviews once; approval issues a real record with adjusted minutes",
+    "M4/M6/M7: rejection creates no record; public history and verification require no signer",
+    "M8: multi-step corrections retain facts and backlinks; revocation preserves old records",
+    "closed activity permits existing pending review; deactivated issuer cannot act; admin can correct"
+  ],
+  "transactions": [
+    {
+      "label": "registerOrganization",
+      "hash": "0x71cdb84457d8a4ac70679be29ee88f14a0764cc1935672eb23c9cc68b4b9edae",
+      "block": 2,
+      "status": 1
+    },
+    {
+      "label": "createActivity",
+      "hash": "0xef221d55cea28f5372903e270ea1dbd038b5cfcbe918c7def3ea080c5687d89d",
+      "block": 3,
+      "status": 1
+    },
+    {
+      "label": "submit claim A",
+      "hash": "0x4d507c478c6527a7c215c24ee91dae61d941b2074612e2772cdb684846fa3c24",
+      "block": 4,
+      "status": 1
+    },
+    {
+      "label": "approve claim A",
+      "hash": "0xa3e899e78a76825f166502d56c1a90c4189b9e46e6de13183717973309e28f35",
+      "block": 5,
+      "status": 1
+    },
+    {
+      "label": "submit claim B",
+      "hash": "0x2b0b5c4e36950283bd9b6b6da3a3d16d425ee476855da356a737bb06137a6f4e",
+      "block": 6,
+      "status": 1
+    },
+    {
+      "label": "reject claim B",
+      "hash": "0x0b7a46b76e6df778dc28c1cdd144cd3e59c81a51b268a0d0535ffbb3e631c268",
+      "block": 7,
+      "status": 1
+    },
+    {
+      "label": "correct record 1",
+      "hash": "0xb9e9439368dc0685525fe95568e1ee16ea060673c93e80f53cfc7371c1f6b854",
+      "block": 8,
+      "status": 1
+    },
+    {
+      "label": "correct record 2",
+      "hash": "0x16ddfdf3d5dd236421b620e7dbc2467b339edf970d10cda63da12bc362bb95e7",
+      "block": 9,
+      "status": 1
+    },
+    {
+      "label": "revoke record 3",
+      "hash": "0xd21e4bccfca66d8123df89224287034b1314b3391e9d856dafe0ab3d0b6ab685",
+      "block": 10,
+      "status": 1
+    },
+    {
+      "label": "submit claim C",
+      "hash": "0x5f97196bfa65669442e3d0b9fea9043743e13bb3de8de44d6596c855bf09009f",
+      "block": 11,
+      "status": 1
+    },
+    {
+      "label": "close activity",
+      "hash": "0x678b0c4344483472acb0fa99d5473a3646259722a438f11e7ae0cf65d648b61f",
+      "block": 12,
+      "status": 1
+    },
+    {
+      "label": "approve pending claim C after closure",
+      "hash": "0x64df7894061020e3c2d4e5a8d88e278ecb2613a88b67e41ee13a5c807fd7a862",
+      "block": 13,
+      "status": 1
+    },
+    {
+      "label": "deactivate issuer",
+      "hash": "0x984f12300588154f9a771da45efa3d33cb5c5596d4a123f633993811eb57d214",
+      "block": 14,
+      "status": 1
+    },
+    {
+      "label": "administrator correction",
+      "hash": "0x6fbd10cbe8add0459fa70f04a4ed2c3b172bae0a007571739a53fb3c397399e8",
+      "block": 15,
+      "status": 1
+    }
+  ],
+  "completedAt": "2026-10-28T05:40:41.397Z"
+}

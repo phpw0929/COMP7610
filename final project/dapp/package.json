@@ -1,12 +1,15 @@
 {
-  "name": "nft-ticket-dapp",
+  "name": "volunteer-hours-registry-dapp",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test test/*.test.js",
+    "test:local": "node scripts/local-chain.mjs",
+    "dev:local": "vite --mode local-test --host 127.0.0.1 --port 5184 --strictPort"
   },
   "dependencies": {
     "ethers": "^6.15.0",
@@ -15,6 +18,11 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",
+    "ganache": "^7.9.2",
+    "solc": "^0.8.34",
     "vite": "^7.1.0"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
   }
 }

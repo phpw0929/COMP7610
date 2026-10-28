@@ -1,0 +1,11 @@
+import fs from "node:fs";
+import { startLocal } from "./local-support.mjs";
+const local = await startLocal(8545);
+const address = await local.contract.getAddress();
+fs.mkdirSync("test", { recursive: true });
+fs.writeFileSync("test/state.json", JSON.stringify({ address, rpc: local.rpc, accounts: local.accounts }, null, 2));
+fs.writeFileSync(".env.local-test.local", `VITE_CONTRACT_ADDRESS=${address}\nVITE_READ_RPC_URL=${local.rpc}\nVITE_CHAIN_ID=0x7a69\nVITE_NETWORK_NAME=Local EVM test\nVITE_EXPLORER_URL=http://127.0.0.1:5184/test/wallet.html\n`);
+console.log(`LOCAL TEST ONLY · chain 31337 · ${local.rpc}\nContract ${address}\nCompiler ${local.compiler}; Shanghai target for Ganache compatibility. Original Sepolia artifacts remain unchanged.`);
+console.log(JSON.stringify({ roles: ["Administrator", "Organization", "Volunteer", "Unauthorized"], accounts: local.accounts }, null, 2));
+console.log("Now run npm run dev:local and open http://127.0.0.1:5184/test/wallet.html");
+for (const signal of ["SIGINT", "SIGTERM"]) process.on(signal, async () => { await local.close(); process.exit(0); });

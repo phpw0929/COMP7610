@@ -1,0 +1,489 @@
+{
+  "environment": "LOCAL EVM UI INTEGRATION - NOT SEPOLIA",
+  "observedAt": "2026-10-28T05:44:27.926Z",
+  "chainId": "31337",
+  "contract": "0x97D06951801e25f4BeD9c0F718B185C8ed9400d8",
+  "accounts": [
+    "0x35EF18929f1f2c3f87432F7Eb9b16EE1F9d5C37e",
+    "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+    "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+    "0xd6a89534c4a2B80eA23516b9bb4ac320beBb63FE"
+  ],
+  "organization": {
+    "id": "1",
+    "wallet": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+    "metadataURI": "http://127.0.0.1:5184/metadata/organization-demo.json",
+    "metadataHash": "0x54012fd4f305c506418cabf665ab4475a9b5ac34288aaf748199406f4b64decd",
+    "active": false,
+    "registeredAt": "1793165393"
+  },
+  "activity": {
+    "id": "1",
+    "issuer": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+    "metadataURI": "http://127.0.0.1:5184/metadata/activity-demo.json",
+    "metadataHash": "0xa301ad9e95da7d710cbb9886d92833bfa5a6a42543ce48190804aba3809107f7",
+    "category": "Community service",
+    "serviceStartDate": "1790812800",
+    "serviceEndDate": "1793491200",
+    "open": false,
+    "createdAt": "1793165427"
+  },
+  "claims": [
+    {
+      "id": "1",
+      "activityId": "1",
+      "volunteer": "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+      "claimedMinutes": "120",
+      "serviceDate": "1792886400",
+      "supportingInfoHash": "0xe0a1fe30b72fa5a978df7a36c061b2b8cfeacc01397fe6013db54c7b6bd089d3",
+      "status": "2",
+      "submittedAt": "1793165510",
+      "reviewedAt": "1793165525",
+      "reviewer": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+      "approvedMinutes": "90",
+      "reviewNoteHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "recordId": "1"
+    },
+    {
+      "id": "2",
+      "activityId": "1",
+      "volunteer": "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+      "claimedMinutes": "60",
+      "serviceDate": "1792886400",
+      "supportingInfoHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "status": "3",
+      "submittedAt": "1793165962",
+      "reviewedAt": "1793165986",
+      "reviewer": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+      "approvedMinutes": "0",
+      "reviewNoteHash": "0xbcb3498ae54c64695a500c5e058c7c1ef86f565a3932d5bba886f5d41eb15726",
+      "recordId": "0"
+    },
+    {
+      "id": "3",
+      "activityId": "1",
+      "volunteer": "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+      "claimedMinutes": "75",
+      "serviceDate": "1792886400",
+      "supportingInfoHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "status": "2",
+      "submittedAt": "1793165962",
+      "reviewedAt": "1793165986",
+      "reviewer": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+      "approvedMinutes": "75",
+      "reviewNoteHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "recordId": "4"
+    }
+  ],
+  "records": [
+    {
+      "id": "1",
+      "claimId": "1",
+      "volunteer": "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+      "issuer": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+      "activityId": "1",
+      "approvedMinutes": "90",
+      "serviceDate": "1792886400",
+      "issuedAt": "1793165525",
+      "status": "3",
+      "replacesRecordId": "0",
+      "replacementRecordId": "2",
+      "statusChangedAt": "1793165586",
+      "reasonHash": "0xfc43830a353098c5b95d6dd292401baf5ebc1dad8a3388526a1e454cb39e677e",
+      "supportingInfoHash": "0xe0a1fe30b72fa5a978df7a36c061b2b8cfeacc01397fe6013db54c7b6bd089d3",
+      "reviewNoteHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "2",
+      "claimId": "1",
+      "volunteer": "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+      "issuer": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+      "activityId": "1",
+      "approvedMinutes": "120",
+      "serviceDate": "1792886400",
+      "issuedAt": "1793165586",
+      "status": "3",
+      "replacesRecordId": "1",
+      "replacementRecordId": "3",
+      "statusChangedAt": "1793165625",
+      "reasonHash": "0x3283bb49888b17e84033cc6630354eaeb8da0ca9b4c7065a652a2fcbc405d2ac",
+      "supportingInfoHash": "0xe0a1fe30b72fa5a978df7a36c061b2b8cfeacc01397fe6013db54c7b6bd089d3",
+      "reviewNoteHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "3",
+      "claimId": "1",
+      "volunteer": "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+      "issuer": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+      "activityId": "1",
+      "approvedMinutes": "125",
+      "serviceDate": "1792886400",
+      "issuedAt": "1793165625",
+      "status": "2",
+      "replacesRecordId": "2",
+      "replacementRecordId": "0",
+      "statusChangedAt": "1793165889",
+      "reasonHash": "0x0407565c7a48d32d1669f5bc2edce6f3a635d4256e20418a8c87ae027f7e25f6",
+      "supportingInfoHash": "0xe0a1fe30b72fa5a978df7a36c061b2b8cfeacc01397fe6013db54c7b6bd089d3",
+      "reviewNoteHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "4",
+      "claimId": "3",
+      "volunteer": "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+      "issuer": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+      "activityId": "1",
+      "approvedMinutes": "75",
+      "serviceDate": "1792886400",
+      "issuedAt": "1793165986",
+      "status": "3",
+      "replacesRecordId": "0",
+      "replacementRecordId": "5",
+      "statusChangedAt": "1793166122",
+      "reasonHash": "0x4fb5bf793bc058149f59767d03881421aa05b1fa0936038dc83e858ae91c5eba",
+      "supportingInfoHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "reviewNoteHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "5",
+      "claimId": "3",
+      "volunteer": "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+      "issuer": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+      "activityId": "1",
+      "approvedMinutes": "80",
+      "serviceDate": "1792886400",
+      "issuedAt": "1793166122",
+      "status": "1",
+      "replacesRecordId": "4",
+      "replacementRecordId": "0",
+      "statusChangedAt": "0",
+      "reasonHash": "0x4fb5bf793bc058149f59767d03881421aa05b1fa0936038dc83e858ae91c5eba",
+      "supportingInfoHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "reviewNoteHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "events": [
+    {
+      "name": "OrganizationRegistered",
+      "args": [
+        "1",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65"
+      ],
+      "block": 2,
+      "tx": "0xf277e35fb50578a47e38e17517a88b9f12889130239ebd86eaf67b98793f2e76"
+    },
+    {
+      "name": "OrganizationStatusChanged",
+      "args": [
+        "1",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        true,
+        "0x35EF18929f1f2c3f87432F7Eb9b16EE1F9d5C37e"
+      ],
+      "block": 2,
+      "tx": "0xf277e35fb50578a47e38e17517a88b9f12889130239ebd86eaf67b98793f2e76"
+    },
+    {
+      "name": "ActivityCreated",
+      "args": [
+        "1",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        "Community service"
+      ],
+      "block": 3,
+      "tx": "0xd6f75fc7b6cc51e1e2d064f3b9c619de90699f1776c680a688ff47b34e8e8545"
+    },
+    {
+      "name": "ServiceClaimSubmitted",
+      "args": [
+        "1",
+        "1",
+        "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+        "120",
+        "1792886400"
+      ],
+      "block": 4,
+      "tx": "0x804a1f877fb10981dd76bf0bd8e7483a1af8a835b274b4f181570b43141ff631"
+    },
+    {
+      "name": "ServiceRecordIssued",
+      "args": [
+        "1",
+        "1",
+        "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        "90",
+        "1792886400",
+        "0"
+      ],
+      "block": 5,
+      "tx": "0xed4d760afaa4c7edbacfe37081f0b7adcb150bb2cf0847b833f84e1259e087e2"
+    },
+    {
+      "name": "ServiceClaimReviewed",
+      "args": [
+        "1",
+        "2",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        "90",
+        "1"
+      ],
+      "block": 5,
+      "tx": "0xed4d760afaa4c7edbacfe37081f0b7adcb150bb2cf0847b833f84e1259e087e2"
+    },
+    {
+      "name": "ServiceRecordIssued",
+      "args": [
+        "2",
+        "1",
+        "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        "120",
+        "1792886400",
+        "1"
+      ],
+      "block": 6,
+      "tx": "0xe8130119d26c868538b72ff210a85ede361b96e4eafdbd37989f4830e961954e"
+    },
+    {
+      "name": "ServiceRecordCorrected",
+      "args": [
+        "1",
+        "2",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        "0xfc43830a353098c5b95d6dd292401baf5ebc1dad8a3388526a1e454cb39e677e"
+      ],
+      "block": 6,
+      "tx": "0xe8130119d26c868538b72ff210a85ede361b96e4eafdbd37989f4830e961954e"
+    },
+    {
+      "name": "ServiceRecordIssued",
+      "args": [
+        "3",
+        "1",
+        "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        "125",
+        "1792886400",
+        "2"
+      ],
+      "block": 7,
+      "tx": "0x40d14d937214c2148423d043b352a5ea9e162c85c0ebbdc308f3b7244ef322c7"
+    },
+    {
+      "name": "ServiceRecordCorrected",
+      "args": [
+        "2",
+        "3",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        "0x3283bb49888b17e84033cc6630354eaeb8da0ca9b4c7065a652a2fcbc405d2ac"
+      ],
+      "block": 7,
+      "tx": "0x40d14d937214c2148423d043b352a5ea9e162c85c0ebbdc308f3b7244ef322c7"
+    },
+    {
+      "name": "ServiceRecordRevoked",
+      "args": [
+        "3",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        "0x0407565c7a48d32d1669f5bc2edce6f3a635d4256e20418a8c87ae027f7e25f6",
+        "1793165889"
+      ],
+      "block": 8,
+      "tx": "0xcc186dda02da7a10909451a87fa1e4097cded2fd3c5c011e9cd90e85dda25da9"
+    },
+    {
+      "name": "ServiceClaimSubmitted",
+      "args": [
+        "2",
+        "1",
+        "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+        "60",
+        "1792886400"
+      ],
+      "block": 9,
+      "tx": "0x24b24ea6e1be6f081b92c70833cfa1cea25e69d7e7e7cf5eff5c644b672d5269"
+    },
+    {
+      "name": "ServiceClaimSubmitted",
+      "args": [
+        "3",
+        "1",
+        "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+        "75",
+        "1792886400"
+      ],
+      "block": 10,
+      "tx": "0x9dd93b07ff7152557b0b0495fb3170dee34a670e1a795b8a3022070f4e2793de"
+    },
+    {
+      "name": "ServiceClaimReviewed",
+      "args": [
+        "2",
+        "3",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        "0",
+        "0"
+      ],
+      "block": 11,
+      "tx": "0x0ffecf1f649e1be3a66c6fbe0e9c07edb4b026856c41dd0c93e80d9f83f24127"
+    },
+    {
+      "name": "ActivityClosed",
+      "args": [
+        "1",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65"
+      ],
+      "block": 12,
+      "tx": "0x49cd6c8fcae71eb9e71a52cad511c80586a2c6546e0da2aca01ea2569d81d500"
+    },
+    {
+      "name": "ServiceRecordIssued",
+      "args": [
+        "4",
+        "1",
+        "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        "75",
+        "1792886400",
+        "0"
+      ],
+      "block": 13,
+      "tx": "0x14323bec9ef8c7e6e94ebd46bb065aebc1cc0fa79ff7d47170ecf16d6c877221"
+    },
+    {
+      "name": "ServiceClaimReviewed",
+      "args": [
+        "3",
+        "2",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        "75",
+        "4"
+      ],
+      "block": 13,
+      "tx": "0x14323bec9ef8c7e6e94ebd46bb065aebc1cc0fa79ff7d47170ecf16d6c877221"
+    },
+    {
+      "name": "OrganizationStatusChanged",
+      "args": [
+        "1",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        false,
+        "0x35EF18929f1f2c3f87432F7Eb9b16EE1F9d5C37e"
+      ],
+      "block": 14,
+      "tx": "0xebc6e6b0bc2c3f63dc70c3f02ca59b1ad4d6da4e81e6c4a11960648824e25069"
+    },
+    {
+      "name": "ServiceRecordIssued",
+      "args": [
+        "5",
+        "1",
+        "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B",
+        "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65",
+        "80",
+        "1792886400",
+        "4"
+      ],
+      "block": 15,
+      "tx": "0x579dbed4e0c66362fcd0b38d2473caa4b6ee241a12c755304ab072428383ad51"
+    },
+    {
+      "name": "ServiceRecordCorrected",
+      "args": [
+        "4",
+        "5",
+        "0x35EF18929f1f2c3f87432F7Eb9b16EE1F9d5C37e",
+        "0x4fb5bf793bc058149f59767d03881421aa05b1fa0936038dc83e858ae91c5eba"
+      ],
+      "block": 15,
+      "tx": "0x579dbed4e0c66362fcd0b38d2473caa4b6ee241a12c755304ab072428383ad51"
+    }
+  ],
+  "receipts": [
+    {
+      "hash": "0xf277e35fb50578a47e38e17517a88b9f12889130239ebd86eaf67b98793f2e76",
+      "status": 1,
+      "block": 2,
+      "from": "0x35EF18929f1f2c3f87432F7Eb9b16EE1F9d5C37e"
+    },
+    {
+      "hash": "0xd6f75fc7b6cc51e1e2d064f3b9c619de90699f1776c680a688ff47b34e8e8545",
+      "status": 1,
+      "block": 3,
+      "from": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65"
+    },
+    {
+      "hash": "0x804a1f877fb10981dd76bf0bd8e7483a1af8a835b274b4f181570b43141ff631",
+      "status": 1,
+      "block": 4,
+      "from": "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B"
+    },
+    {
+      "hash": "0xed4d760afaa4c7edbacfe37081f0b7adcb150bb2cf0847b833f84e1259e087e2",
+      "status": 1,
+      "block": 5,
+      "from": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65"
+    },
+    {
+      "hash": "0xe8130119d26c868538b72ff210a85ede361b96e4eafdbd37989f4830e961954e",
+      "status": 1,
+      "block": 6,
+      "from": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65"
+    },
+    {
+      "hash": "0x40d14d937214c2148423d043b352a5ea9e162c85c0ebbdc308f3b7244ef322c7",
+      "status": 1,
+      "block": 7,
+      "from": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65"
+    },
+    {
+      "hash": "0xcc186dda02da7a10909451a87fa1e4097cded2fd3c5c011e9cd90e85dda25da9",
+      "status": 1,
+      "block": 8,
+      "from": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65"
+    },
+    {
+      "hash": "0x24b24ea6e1be6f081b92c70833cfa1cea25e69d7e7e7cf5eff5c644b672d5269",
+      "status": 1,
+      "block": 9,
+      "from": "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B"
+    },
+    {
+      "hash": "0x9dd93b07ff7152557b0b0495fb3170dee34a670e1a795b8a3022070f4e2793de",
+      "status": 1,
+      "block": 10,
+      "from": "0x8d0aE78E77D355b6D5Cb8Dd61fd992f026A4983B"
+    },
+    {
+      "hash": "0x0ffecf1f649e1be3a66c6fbe0e9c07edb4b026856c41dd0c93e80d9f83f24127",
+      "status": 1,
+      "block": 11,
+      "from": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65"
+    },
+    {
+      "hash": "0x49cd6c8fcae71eb9e71a52cad511c80586a2c6546e0da2aca01ea2569d81d500",
+      "status": 1,
+      "block": 12,
+      "from": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65"
+    },
+    {
+      "hash": "0x14323bec9ef8c7e6e94ebd46bb065aebc1cc0fa79ff7d47170ecf16d6c877221",
+      "status": 1,
+      "block": 13,
+      "from": "0xbCe060df01F5D120ba0fEfbF41674C1e0bFF8B65"
+    },
+    {
+      "hash": "0xebc6e6b0bc2c3f63dc70c3f02ca59b1ad4d6da4e81e6c4a11960648824e25069",
+      "status": 1,
+      "block": 14,
+      "from": "0x35EF18929f1f2c3f87432F7Eb9b16EE1F9d5C37e"
+    },
+    {
+      "hash": "0x579dbed4e0c66362fcd0b38d2473caa4b6ee241a12c755304ab072428383ad51",
+      "status": 1,
+      "block": 15,
+      "from": "0x35EF18929f1f2c3f87432F7Eb9b16EE1F9d5C37e"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Frontend Handoff: VolunteerHoursRegistry
 
+Updated 2026-10-28. The address below has passed real RPC/browser reads; executable bytecode matches the artifact excluding immutable ranges and compiler metadata. The metadata hash differs; deployment transaction and role control are still pending in [integration_status.md](integration_status.md). See [execution_plan.md](../doc/execution_plan.md) for the frontend and complete coursework delivery plan.
+
 ## Connection data
 
 - Network: Sepolia
@@ -12,6 +14,8 @@
 
 Writes require a signer, MetaMask approval, and gas. View functions are read-only. Durations use whole minutes, dates use Unix seconds, IDs use integers, and optional hashes use a 32-byte zero hash.
 
+Only supporting-information hashes and approval review-note hashes are optional. Organization/activity metadata hashes and rejection/revocation/correction reason hashes must be nonzero. The zero hash is not a valid substitute for required metadata/reasons. JSON metadata integrity uses keccak256 of exact fetched bytes. Public wallet-free verification uses the implemented READ_RPC_URL / VITE_READ_RPC_URL configuration, with a public Sepolia default. No signature is requested for these reads.
+
 Claim status: `0 None`, `1 Pending`, `2 Approved`, `3 Rejected`.
 
 Record status: `0 None`, `1 Valid`, `2 Revoked`, `3 Corrected`.
@@ -19,6 +23,8 @@ Record status: `0 None`, `1 Valid`, `2 Revoked`, `3 Corrected`.
 ## Frontend-callable functions
 
 For read functions, the example is the returned value. For write functions, Ethers.js first returns a transaction response such as `{ hash: "0x..." }`; after `await tx.wait()`, the Solidity result can be obtained from the receipt/event. Addresses and hashes below are shortened for readability.
+
+For writes, the Solidity return value is not a direct property of the transaction response or receipt. Parse the relevant emitted event for the ID, or query confirmed contract state. Getter integers are generally `bigint` in Ethers 6. Treat `getOrganization` reverting for an unregistered wallet as a normal non-organization case, while distinguishing transport/network errors.
 
 | Function | Purpose | Inputs | Output | Example output |
 |---|---|---|---|---|
@@ -67,3 +73,8 @@ Returned structs contain:
 ## Internal Solidity helpers
 
 `_requireServiceDateInWindow`, `_requireActiveOrganization`, `_requireRecordManager`, `_getPendingClaim`, `_getValidRecord`, `_storeServiceRecord`, and `_validateMetadata` are private helpers. They are not frontend-callable and do not belong in the UI function list.
+
+
+## Current execution evidence
+
+The UI, local-EVM lifecycle and 15 automated tests have been implemented and executed; see [browser_acceptance.md](../test/acceptance/browser_acceptance.md). Local signing through a development harness is not live MetaMask/Sepolia acceptance. The existing issuer is inactive and its old activity closed; the contract owner must prepare a new demo activity and accessible metadata. Keep source/ABI stable or apply the [merge protocol](merge_protocol.md) before final verification.

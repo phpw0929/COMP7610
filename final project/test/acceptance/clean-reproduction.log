@@ -1,0 +1,8 @@
+2026-10-28 | Node 24.19.0 | isolated clean source directory
+Copied dapp without node_modules, dist, local environment files or test wallet state.
+Executed npm ci --no-audit --no-fund: exit 0; 419 packages installed.
+Executed npm test: exit 0; tests 15, pass 15, fail 0, skipped 0.
+Executed npm run build: exit 0; Vite 7.3.6; 174 modules transformed.
+Ganache used its JavaScript uWS fallback because the Node 24 native binding was unavailable.
+No personal wallet, local .env or pre-existing node_modules was required.
+This is an install/test/build reproduction, not a fresh Sepolia transaction.

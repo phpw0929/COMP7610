@@ -1,10 +1,14 @@
-export const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS ?? "";
+const env = import.meta.env ?? {};
+
+export const CONTRACT_ADDRESS = env.VITE_CONTRACT_ADDRESS ?? "0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe";
+
+export const READ_RPC_URL = env.VITE_READ_RPC_URL ?? "https://ethereum-sepolia-rpc.publicnode.com";
 
 export const SEPOLIA_CHAIN_ID =
-  import.meta.env.VITE_CHAIN_ID ?? "0xaa36a7";
+  env.VITE_CHAIN_ID ?? "0xaa36a7";
 
 export const SEPOLIA_EXPLORER_URL =
-  import.meta.env.VITE_EXPLORER_URL ?? "https://sepolia.etherscan.io";
+  env.VITE_EXPLORER_URL ?? "https://sepolia.etherscan.io";
 
 export const CONTRACT_ABI = [
   {
@@ -1036,3 +1040,6 @@ export const RECORD_STATUS = {
   2: "Revoked",
   3: "Corrected",
 };
+
+export const NETWORK_NAME = env.VITE_NETWORK_NAME ?? "Sepolia";
+export const LOCAL_TEST = env.MODE === "local-test";

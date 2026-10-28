@@ -1,0 +1,93 @@
+{
+  "time": "2026-10-28T05:16:20.780Z",
+  "chainId": "11155111",
+  "address": "0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe",
+  "codeBytes": 22670,
+  "administrator": "0xb3B9ABeF11709509E6cd2424f9A9f744394adc25",
+  "counts": [
+    "1",
+    "1",
+    "3",
+    "4"
+  ],
+  "organizations": [
+    {
+      "id": "1",
+      "wallet": "0xff4e2bAA091080a9b45E3d66D6816FEd65e94599",
+      "metadataURI": "https://example.org/org.json",
+      "metadataHash": "0xff2fe0d0dc64081fffddf3e4c0c648abb0befa3800208b4d439b5eb83c15aec3",
+      "active": false,
+      "registeredAt": "1793118672"
+    }
+  ],
+  "records": [
+    {
+      "id": "1",
+      "claimId": "1",
+      "volunteer": "0xAf5837981Ef21BdB6A095D452ab1C5407E7c01B3",
+      "issuer": "0xff4e2bAA091080a9b45E3d66D6816FEd65e94599",
+      "activityId": "1",
+      "approvedMinutes": "90",
+      "serviceDate": "1792886400",
+      "issuedAt": "1793120100",
+      "status": "3",
+      "replacesRecordId": "0",
+      "replacementRecordId": "2",
+      "statusChangedAt": "1793121768",
+      "reasonHash": "0x7382716f496e79c796e3dece3423f7d0a0f4c743bd6a3d3d8dc0aff39fcb2cc4",
+      "supportingInfoHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "reviewNoteHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "2",
+      "claimId": "1",
+      "volunteer": "0xAf5837981Ef21BdB6A095D452ab1C5407E7c01B3",
+      "issuer": "0xff4e2bAA091080a9b45E3d66D6816FEd65e94599",
+      "activityId": "1",
+      "approvedMinutes": "120",
+      "serviceDate": "1792886400",
+      "issuedAt": "1793121768",
+      "status": "2",
+      "replacesRecordId": "1",
+      "replacementRecordId": "0",
+      "statusChangedAt": "1793122092",
+      "reasonHash": "0x22cbf7fc9c7ed7e24fa87a802c449c808d8964201dbf152069aaf47cb6993df0",
+      "supportingInfoHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "reviewNoteHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "3",
+      "claimId": "3",
+      "volunteer": "0xAf5837981Ef21BdB6A095D452ab1C5407E7c01B3",
+      "issuer": "0xff4e2bAA091080a9b45E3d66D6816FEd65e94599",
+      "activityId": "1",
+      "approvedMinutes": "60",
+      "serviceDate": "1792886400",
+      "issuedAt": "1793122476",
+      "status": "3",
+      "replacesRecordId": "0",
+      "replacementRecordId": "4",
+      "statusChangedAt": "1793123064",
+      "reasonHash": "0x7382716f496e79c796e3dece3423f7d0a0f4c743bd6a3d3d8dc0aff39fcb2cc4",
+      "supportingInfoHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "reviewNoteHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "4",
+      "claimId": "3",
+      "volunteer": "0xAf5837981Ef21BdB6A095D452ab1C5407E7c01B3",
+      "issuer": "0xff4e2bAA091080a9b45E3d66D6816FEd65e94599",
+      "activityId": "1",
+      "approvedMinutes": "75",
+      "serviceDate": "1792886400",
+      "issuedAt": "1793123064",
+      "status": "2",
+      "replacesRecordId": "3",
+      "replacementRecordId": "0",
+      "statusChangedAt": "1793123196",
+      "reasonHash": "0x22cbf7fc9c7ed7e24fa87a802c449c808d8964201dbf152069aaf47cb6993df0",
+      "supportingInfoHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "reviewNoteHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ]
+}
