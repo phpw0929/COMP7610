@@ -22,7 +22,7 @@
 | 链上历史日志 | 请求窗口遇到 pruned history | 朋友提供部署/批准/更正等交易链接；本次不补造 |
 | metadata | 真实 Sepolia 为不可用 example.org；本地新增明确 demo JSON 并验证 hash | 发布真实 HTTPS URL，并在新 Sepolia 对象中使用 |
 | 专用本地测试钱包 | 已生成，真实本地 EVM + 开发专用 EIP-1193 harness | 不属于真实 Sepolia 账号，不保留私人密钥入库 |
-| GitHub 同步 | 连接账号 Mikuu177 对原仓库 `push:false`，CLI 配置不可读 | 有权限的人合入前端 commit/patch；未执行远端推送 |
+| GitHub 同步 | 2026-10-28 本机 Git 凭据已将前端交付快进推送到 `phpw0929/COMP7610` 的 `main`，远端 SHA 核对通过 | 后续合约集成需保存朋友原目录的未提交改动并再核对远端；学校提交仍待完成 |
 | Moodle/个人互评入口 | 独立页面导航超时，实时状态未知 | 最后由 S/每人核对与提交，不能代填未知成绩/贡献 |
 
 ## 2. 执行阶段
@@ -36,7 +36,7 @@
 | G4 生命周期/异常 | 本地 UI 与合约测试通过 | 拒绝、关闭/停用、更正/撤销、管理员介入、拒签、权限；T11 仍有未触发组合 |
 | G5 验收 | 已完成主要本地/读链验收，最终测试网写入待补 | 15 自动测试、14 UI 本地成功交易、390px 无溢出、干净复现；完整记录见 browser_acceptance |
 | G6 报告/视频 | 草稿已生成 | A4 英文 Word/PDF（含封面 7 页）、Karen 温柔女声英文证据讲解视频（约 4 分 7 秒）；非最终 signed Sepolia live demo；成员信息待补 |
-| G7 交付/提交 | 本地源码、提交/patch/ZIP/manifest 整理；课程提交未做 | 以 manifest 记录的实际文件/commit 为准，不能当作远端同步或平台回执 |
+| G7 交付/提交 | 本地源码、patch/ZIP/manifest 已整理，前端交付已推送远端 `main`；课程提交未做 | 以 manifest 与远端提交记录核对版本；GitHub 推送不是学校提交回执 |
 
 ## 3. 验收入口
 

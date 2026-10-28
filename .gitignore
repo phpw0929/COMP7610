@@ -8,3 +8,6 @@ cache/
 
 # Local report rendering and transient media
 final project/tmp/
+
+# macOS Finder metadata
+.DS_Store

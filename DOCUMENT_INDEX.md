@@ -2,7 +2,7 @@
 
 更新日期：2026-10-28。源码基线 `21ad35e`，接口交接 `fc728cb`。本轮前端交付在 `COMP7610/delivery`；朋友的原工作目录 `COMP7610/repo` 保留，分流后不覆盖。
 
-当前已实现前端并完成主要本地验收和真实 Sepolia 读取；报告/视频为草稿，最终测试网签名、组员身份和课程提交待补。本次已更新 Karen 女声配音、含封面 7 页的正式版式 Word/PDF 与前端代码交接。文档新增、移动或修改时必须同步本索引。
+当前已实现前端并完成主要本地验收和真实 Sepolia 读取；前端交付已于 2026-10-28 快进推送远端 `main` 并核对 SHA。报告/视频为草稿，最终测试网签名、组员身份和课程提交待补。本次已更新 Karen 女声配音、含封面 7 页的正式版式 Word/PDF 与前端代码交接。文档新增、移动或修改时必须同步本索引。
 
 ## 文档和记录
 
@@ -65,7 +65,7 @@
 | `final project/dapp/scripts/read-sepolia.mjs` | 只读刷新真实 code/getter/字节码对比与历史日志尝试；不签名。 |
 | `final project/submission/build_report.py`、`build_demo.py` | Markdown→Word 报告与英文证据视频重建；视频默认 Karen 女声、145 words/minute，使用 macOS say/FFmpeg。 |
 | `final project/submission/build_delivery.py` | 干净提交的累计 binary patch、ZIP、回执；验证 patch 的 Git tree 和 ZIP 完整性。 |
-| `.gitignore`、`final project/submission/.gitignore` | 忽略依赖、渲染临时文件、大媒体、patch/ZIP 和生成回执。 |
+| `.gitignore`、`final project/submission/.gitignore` | 忽略依赖、渲染临时文件、大媒体、patch/ZIP、生成回执及 macOS `.DS_Store`。 |
 | `assignment 3/scripts/`、`assets/`、`remix.config.json` | 原 Assignment 3 合约、素材与配置，不参与本项目运行。 |
 
 ## 数据、媒体与交付附件

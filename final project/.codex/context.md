@@ -2,7 +2,7 @@
 
 Updated on 2026-10-28 after explicit execution authorization. The frontend is now implemented and builds successfully; 15 automated tests, a complete local-EVM browser workflow (14 successful transactions), clean reproduction, mobile width checks and real Sepolia read-only verification have passed. Solidity and original artifacts remain unchanged. Report/video drafts are generated, not final course submissions. User confirmed friend owns contracts/deployment and this work owns frontend. Member identities can be filled last.
 
-This work is isolated in `/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery`; preserve the concurrently edited `/Users/diannao/Desktop/HKU/Semester-1/COMP7610/repo`. Use handoff/merge_protocol.md. Connected GitHub account has no push access to the original repository.
+This work is isolated in `/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery`; preserve the concurrently edited `/Users/diannao/Desktop/HKU/Semester-1/COMP7610/repo`. Use handoff/merge_protocol.md. On 28 October 2026, local Git credentials successfully pushed the frontend delivery to remote main and its SHA was checked; the friend’s original worktree was left untouched and still contained uncommitted changes.
 
 ## Read first
 
@@ -84,7 +84,7 @@ Exclude payments, reward tokens, NFTs, transferable credentials, GPS/geofencing,
 - Keep the implemented `dapp/contracts/VolunteerHoursRegistry.sol` and ABI stable for frontend work. Follow G0-G7 incrementally and record real T01-T14 results. Ganache and solc were added for development-only real local-EVM tests; no production library or contract rewrite was added.
 - Demonstrate administrator registration, activity creation, claim submission, unauthorized-review rejection, approval/issuance, volunteer history, public lookup, and revocation/correction history.
 - Coursework requires meaningful on-chain operation(s), a testnet deployment, an English demo within 15 minutes, a PDF report, and runnable source with README. The brief lists final submission on November 8 at 11:59 PM.
-- Use simple Git workflows in the parent `COMP7610` repository: `https://github.com/phpw0929/COMP7610.git`. The template's nested `dapp/.git` was moved out. Recheck status; earlier failed pushes do not establish current sync state.
+- Use simple Git workflows in the parent `COMP7610` repository: `https://github.com/phpw0929/COMP7610.git`. The template's nested `dapp/.git` was moved out. The frontend delivery was pushed to main on 28 October 2026; verify the latest remote SHA before future integration.
 
 Next: finish the external integration conditions: contract owner must provide controllable Sepolia wallets/test ETH, deployment tx and published metadata; run a fresh signed UI workflow. Add real group contributions and confirm live portal requirements, then finalize report/video and submit. Do not redo the already implemented frontend or relabel local tests as Sepolia writes. Keep evidence, code changes, deployment, media delivery and submission states separate; preserve the approved scope.
 
