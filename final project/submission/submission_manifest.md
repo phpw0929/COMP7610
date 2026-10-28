@@ -7,20 +7,22 @@
 - 原始基线：`21ad35e`；接口交接：`fc728cb`。
 - 用户确认：朋友负责合约/部署，我方负责前端；真实成员身份与最终贡献最后补。
 - 当前交付目录：`/Users/diannao/Desktop/HKU/Semester-1/COMP7610/delivery`；原 repo 目录未覆盖。
-- 前端目录源码指纹（路径 + 各文件 SHA256；不含依赖/构建/本地环境/测试账号）：`cded988446ac9ee6dae8723bbdd64af00595eb2888420ca334cf097dab6075e7`。
-- 指纹覆盖 25 个源码/配置/原始产物文件；完整 Git commit、patch 和 ZIP 校验见打包后生成的 delivery_receipt.json。
+- 前端规范文件清单 SHA256：`d3b0d0c132befc038cbf70c3f2db2003aab975760abf923b065cc64887dfb421`。按仓库相对路径排序 `{path,sha256}` 列表，对 UTF-8 compact sorted-key JSON（无末尾换行）求 SHA256；算法详见 document_media_qa.md。
+- 清单覆盖 25 个源码/配置/原始产物文件，与已验收前端 commit f2e4d32 的文件完全一致；完整 Git commit、patch 和 ZIP 校验见打包后生成的 delivery_receipt.json。
 
 ## 交付文件与 SHA256
 
 | 文件 | 大小 bytes | SHA256 |
 | --- | --- | --- |
-| `final project/submission/project_report_draft.pdf` | 46656 | `315726a2e8a5b0e691232382d287fc7ddd0cfcdb78d709714bdec9e2dc7624f4` |
-| `final project/submission/demo_walkthrough_draft.mp4` | 15047775 | `0bdf42c1c5ed4ae52eeb6e28bbe317b0a9069f7c886c88dcfd1258873dadf18e` |
+| `final project/submission/project_report_draft.docx` | 239901 | `5cd4abd446a36aceb91ef45f169cb4306798dfa812c6d2c21b868611d038780f` |
+| `final project/submission/project_report_draft.pdf` | 381475 | `6610d5258c681487e7ea7580bfc4b1eb2693e7f7519cffcbc2e1e4c6a1540a55` |
+| `final project/submission/demo_walkthrough_draft.mp4` | 17488030 | `2199a93ec92fb7c6bdc80c71249e06a9293db93acff58e93a746586954791b51` |
 | `final project/submission/browser-regression-repro.mp4` | 297561 | `c78b3275b2b6454dc12d3ad5233e45d05ca326db01bd974b209b0ff88824b7dc` |
+| `final project/handoff/frontend_code_handoff.md` | 13085 | `1623a5ada71f728c0e9abd43645f156df7f99dd32711f57a5015176523d50ad4` |
 | `final project/test/acceptance/local-browser-ledger.json` | 15435 | `acb8b3887cf0ebcc62f301f3b9bec6186663bed583b6b1212b443caa2b29bd00` |
 | `final project/test/acceptance/sepolia-proof.json` | 6052 | `333d0fbb8aec21fefac66ab851cf16af07dbf309b3716f635bf5a6ff672eb5e8` |
 
-报告 PDF 4 页已逐页渲染检查；英文旁白视频 220.27 秒、1920×1080、H.264/AAC，完整解码无错误，音频非静音且未检测到满幅削波（max -1.4 dB）。视频为真实捕获画面的证据讲解草稿，采用系统合成英文旁白，不冒充最终 live testnet demo。修复前问题视频来自 29 个真实 screencast 帧，空闲间隔最多保留 8 秒。
+报告以可编辑 Word 和同版 PDF 交付，含封面 7 页，A4、12 pt Times New Roman、1.5 行距、黑色标题、正文页码、图表与编号参考文献；PDF 字体已嵌入，7 页逐页检查。英文证据视频使用 Karen 女声、145 words/minute，246.88 秒、1920×1080、H.264/AAC（48 kHz）；完整解码无错误，综合响度 -18.0 LUFS、max/true peak -2.6 dB。保留实际截图与 DRAFT 标记，不冒充最终 signed Sepolia live demo。详见 document_media_qa.md。修复前问题视频仍来自 29 个真实 screencast 帧，空闲间隔最多保留 8 秒。
 
 ## 验收范围
 
@@ -38,4 +40,6 @@
 3. 填写完整成员姓名/学号/实际贡献，核对课程政策、截止与入口，完成报告/视频定稿。
 4. 有权限的人推送最终仓库、提交团队文件；每人完成 Peer assignment 04，保留各自回执。
 
-当前 GitHub 账号对原仓库无 push 权限，未推送。合并方式见 handoff/merge_protocol.md；本地 commit/patch 作为交接，不覆盖朋友未提交内容。
+当前 GitHub 账号对原仓库无 push 权限，未推送。运行/维护/对接入口见 handoff/frontend_code_handoff.md，合并分工见 handoff/merge_protocol.md；本地 commit/patch 作为交接，不覆盖朋友未提交内容。
+
+交付包维护：先更新正文、媒体、manifest 与总索引并提交，再运行 submission/build_delivery.py。累计 patch 从 21ad35e 到交付 HEAD，覆盖完整前端与本次文档修订；临时 index 的 tree 校验和 ZIP CRC/文件集合校验通过后才生成最终回执。ZIP 内回执不包含外层 ZIP 自身哈希，外侧回执包含。

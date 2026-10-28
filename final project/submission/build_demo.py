@@ -1,5 +1,10 @@
 from pathlib import Path
+import argparse
 import subprocess,json
+parser = argparse.ArgumentParser(description='Render the evidence draft with calm English female narration.')
+parser.add_argument('--voice', default='Karen')
+parser.add_argument('--rate', type=int, default=145)
+args = parser.parse_args()
 root=Path(__file__).resolve().parent
 evidence=root.parent/'test'/'acceptance'
 media=root/'media';media.mkdir(exist_ok=True)
@@ -11,13 +16,13 @@ segments=[
  ('Verification results and responsive layout', 'mobile-390.jpg', 'Fifteen automated tests passed. They cover integer and date boundaries, metadata integrity, review permissions, rejection without issuance, public history, multiple corrections, revocation, activity closure and administrator intervention. Separate browser operation created fourteen successful local transactions, three claims and five records. Wallet rejection produced a clear message instead of fake success. An unauthorized wallet could not enter administration. A three hundred and ninety pixel viewport had no horizontal overflow. A clean installation passed the same tests and the production build. These are functional results, not production performance measurements.'),
  ('Team handoff and remaining final evidence', 'local-admin-correction.jpg', 'The ownership boundary is agreed: the friend maintains contracts and deployment, while this work delivers the frontend and integration tests. The repository includes a readable report draft, source code, configuration, a merge protocol and evidence files. Before the final course submission, the team must add real member details, publish usable demo metadata, confirm the deployment transaction, and record a fresh signed Sepolia workflow through the frontend. The final English video must remain within fifteen minutes. Each student must also complete the individual peer assignment. Private keys should never be shared. This draft honestly separates completed frontend work from the remaining team actions.'),
 ]
-script=['# English evidence walkthrough script','', 'Status: development draft. Captured screens with generated English narration; not the final signed Sepolia live demonstration.','']
+script=['# English evidence walkthrough script','', 'Status: development draft. Captured screens with calm English female narration; not the final signed Sepolia live demonstration.','']
 clips=[]
 for i,(title,image,text) in enumerate(segments,1):
  script+=['## '+str(i)+'. '+title,'',text,'']
  textfile=media/f'{i:02d}.txt';textfile.write_text(text)
  audio=media/f'{i:02d}.aiff'
- subprocess.run(['say','-v','Samantha','-r','155','-f',str(textfile),'-o',str(audio)],check=True)
+ subprocess.run(['say','-v',args.voice,'-r',str(args.rate),'-f',str(textfile),'-o',str(audio)],check=True)
  duration=float(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','default=noprint_wrappers=1:nokey=1',str(audio)],text=True).strip())+1
  caption=f'DRAFT {i}/6 - {title}'
  vf=(f"crop=iw:min(ih\\,900):0:(ih-oh)*min(t/{duration}\\,1),"
@@ -27,11 +32,12 @@ for i,(title,image,text) in enumerate(segments,1):
      "drawtext=fontfile=/System/Library/Fonts/Supplemental/Arial.ttf:text='Captured browser evidence - final testnet signing and team details pending':fontcolor=0xcbd8cd:fontsize=23:x=45:y=1041")
  clip=media/f'{i:02d}.mp4'
  with (media/f'{i:02d}.log').open('w') as log:
-  subprocess.run(['ffmpeg','-y','-loop','1','-framerate','25','-i',str(evidence/image),'-i',str(audio),'-vf',vf,'-af','apad','-t',str(duration),'-c:v','libx264','-preset','veryfast','-crf','24','-pix_fmt','yuv420p','-c:a','aac','-b:a','128k',str(clip)],check=True,stdout=log,stderr=log)
+  subprocess.run(['ffmpeg','-y','-loop','1','-framerate','25','-i',str(evidence/image),'-i',str(audio),'-vf',vf,'-af','highpass=f=70,equalizer=f=3500:t=q:w=1:g=-2,lowpass=f=8000,acompressor=threshold=0.13:ratio=1.6:attack=15:release=140:makeup=1,loudnorm=I=-18:LRA=6:TP=-2,apad','-t',str(duration),'-c:v','libx264','-preset','veryfast','-crf','24','-pix_fmt','yuv420p','-c:a','aac','-ar','48000','-b:a','128k',str(clip)],check=True,stdout=log,stderr=log)
  clips.append(clip);print('Rendered chapter',i,round(duration,1),'seconds',flush=True)
 (root/'demo_script.md').write_text('\n'.join(script))
 concat=media/'concat.txt';concat.write_text(''.join("file '"+str(p).replace("'","'\\''")+"'\n" for p in clips))
 subprocess.run(['ffmpeg','-y','-f','concat','-safe','0','-i',str(concat),'-c','copy','-movflags','+faststart',str(root/'demo_walkthrough_draft.mp4')],check=True,stdout=subprocess.DEVNULL,stderr=(media/'concat.log').open('w'))
 probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(root/'demo_walkthrough_draft.mp4')],text=True))
+probe['narration'] = {'engine': 'macOS say', 'voice': args.voice, 'language': 'English', 'wordsPerMinute': args.rate, 'profile': 'Calm female voice with slower pacing and softened upper frequencies', 'mix': '70 Hz high-pass, -2 dB at 3.5 kHz, 8 kHz low-pass, gentle compression, -18 LUFS target, -2 dBTP target'}
 (root/'demo_media_probe.json').write_text(json.dumps(probe,indent=2)+'\n')
 print('Video complete',probe['format']['duration'],'seconds',flush=True)

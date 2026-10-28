@@ -11,6 +11,7 @@ Paths below are relative to `final project/`:
 - `AGENTS.md`: project workflow instructions.
 - `doc/execution_plan.md`: current implementation, acceptance, report/video and submission plan (G0-G7).
 - `doc/plan_review_2026-10-28.md`: feasibility and formal course-requirements coverage; not an implementation pass.
+- `handoff/frontend_code_handoff.md`: practical code map, run commands, merge and final acceptance handoff.
 - `handoff/integration_status.md`: outstanding deployment/RPC/accounts/metadata, real progress and evidence.
 - `../DOCUMENT_INDEX.md`: complete repository document index; update when documents change.
 - `doc/plan.md`: reviewed product plan, data model, business rules, and acceptance criteria.
@@ -92,4 +93,4 @@ Next: finish the external integration conditions: contract owner must provide co
 
 Real Sepolia proof: `test/acceptance/sepolia-proof.json`, code/getters and browser record lookup. Executable code matches the build excluding immutable slots and CBOR metadata; full compiler metadata differs, and historical logs were pruned at the public endpoint. This is not deployment receipt/source verification. Existing issuer is inactive; old activity is closed, records corrected/revoked.
 
-Local browser proof: `local-browser-ledger.json`, 14 real local transactions, 3 claims and 5 records. The injected test role toolbar is confined to local-test development on loopback and absent from the production build. Report is 4 pages; narrated evidence draft is about 220 seconds, based on actual captures with system-synthesized English speech. Do not call it the final live Sepolia recording. T11 delayed/cancelled/provider combinations remain partially untested.
+Local browser proof: `local-browser-ledger.json`, 14 real local transactions, 3 claims and 5 records. The injected test role toolbar is confined to local-test development on loopback and absent from the production build. Report is 7 pages including its cover, with editable Word and a PDF exported from the same document; the evidence draft is about 247 seconds with Karen female narration at 145 words/minute, based on actual captures. Do not call it the final live Sepolia recording. T11 delayed/cancelled/provider combinations remain partially untested.

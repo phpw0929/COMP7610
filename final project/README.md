@@ -12,6 +12,7 @@ These are separate evidence scopes. No new Sepolia wallet transaction was signed
 - [Product scope](doc/plan.md) and [execution plan](doc/execution_plan.md)
 - [Acceptance results](test/acceptance/browser_acceptance.md), [integration status](handoff/integration_status.md)
 - [Contract interface](handoff/frontend_handoff.md) and [two-person merge protocol](handoff/merge_protocol.md)
+- [Code handoff](handoff/frontend_code_handoff.md): run, maintain, integrate and accept the frontend
 - [Report source](submission/project_report_draft.md), PDF draft and video assets under `submission/`
 
 ## Run
@@ -103,6 +104,6 @@ The contract teammate must provide final deployment provenance and controllable 
 
 ## Delivery and remaining coursework
 
-`submission/` contains the editable English report source, generated PDF draft, English narrated captured-screen walkthrough, media probes/build scripts and manifest. The video is 1920×1080 output; source browser captures retain their original detail and are visibly marked as draft evidence. It is not the final signed testnet live-demo recording. Member names/IDs and real contribution attribution are deliberately left for the team.
+`submission/` contains the English report Markdown, editable Word and its matching 7-page A4 PDF draft, a captured-screen walkthrough with Karen female narration at 145 words/minute (about 247 seconds), media probes/build scripts and manifest. [Frontend code handoff](handoff/frontend_code_handoff.md) explains setup, source entry points, business invariants, contract integration, merging and remaining final acceptance. The video is 1920×1080 output; source browser captures retain their original detail and are visibly marked as draft evidence. It is not the final signed testnet live-demo recording. Member names/IDs and real contribution attribution are deliberately left for the team.
 
 Final course delivery still needs the signed testnet demonstration, final report/contribution table, any slides actually made, detailed runnable source, latest portal checks and submission receipts. Each student separately completes Peer assignment 04. The original PDF lists November 8 at 23:59, but live course pages could not be verified here. No course submission occurred.

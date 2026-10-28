@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="470" viewBox="0 0 1440 470">
+<rect width="1440" height="470" fill="white"/>
+<g fill="#f2f2f2" stroke="#767676" stroke-width="2">
+<rect x="12" y="155" width="375" height="160" rx="9"/>
+<rect x="490" y="45" width="375" height="110" rx="9"/>
+<rect x="490" y="250" width="375" height="110" rx="9"/>
+<rect x="1025" y="130" width="395" height="125" rx="9"/>
+<rect x="1025" y="335" width="395" height="110" rx="9"/>
+</g>
+<g fill="none" stroke="#333" stroke-width="3">
+<path d="M387 190 L490 100 M387 280 L490 305 M865 100 L1025 165 M865 305 L1025 225 M200 315 L200 390 L1025 390"/>
+<path d="M477 98 L490 100 L483 112 M476 299 L490 305 L477 312 M1011 155 L1025 165 L1008 167 M1008 226 L1025 225 L1015 237 M1011 382 L1025 390 L1011 398"/>
+</g>
+<g font-family="Arial, sans-serif" font-size="29" fill="black" text-anchor="middle">
+<text x="199" y="196">React interface</text><text x="199" y="238">Public and volunteer views</text><text x="199" y="280">Admin and issuer views</text>
+<text x="678" y="90">Read only RPC</text><text x="678" y="130">No wallet signature</text>
+<text x="678" y="294">MetaMask signer</text><text x="678" y="334">Account and chain checks</text>
+<text x="1222" y="180">Solidity registry</text><text x="1222" y="223">Permissions and states</text>
+<text x="1222" y="378">Public metadata JSON</text><text x="1222" y="419">Client checks byte hash</text>
+</g></svg>

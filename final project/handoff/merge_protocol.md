@@ -17,6 +17,8 @@
 | 我方 | `dapp/src/`、`index.html`、前端配置、前端/本地 EVM 测试与运行说明 | 保持现有 Solidity 不变；本地测试编译针对 Ganache 的 Shanghai 目标，不替换原 Sepolia 产物 |
 | 共同核对，由我方暂整合 | `src/contract.js`、README、交付状态、报告/视频、总索引 | ABI 只接受合约最终产物；成员贡献和提交状态由真人提供和核对 |
 
+代码入口、环境配置、业务不变量、累计 patch 的具体命令与故障排查见 [frontend_code_handoff.md](frontend_code_handoff.md)。交付包覆盖从 `21ad35e` 到最终交付 commit 的完整差异，包含本次文档与配音更新。
+
 ## 合并步骤
 
 1. 双方完成当前小阶段，分别做一个清晰提交，记录 commit。不要在同一工作目录同时编辑。

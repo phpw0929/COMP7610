@@ -2,7 +2,7 @@
 
 更新日期：2026-10-28。源码基线 `21ad35e`，接口交接 `fc728cb`。本轮前端交付在 `COMP7610/delivery`；朋友的原工作目录 `COMP7610/repo` 保留，分流后不覆盖。
 
-当前已实现前端并完成主要本地验收和真实 Sepolia 读取；报告/视频为草稿，最终测试网签名、组员身份和课程提交待补。文档新增、移动或修改时必须同步本索引。
+当前已实现前端并完成主要本地验收和真实 Sepolia 读取；报告/视频为草稿，最终测试网签名、组员身份和课程提交待补。本次已更新 Karen 女声配音、含封面 7 页的正式版式 Word/PDF 与前端代码交接。文档新增、移动或修改时必须同步本索引。
 
 ## 文档和记录
 
@@ -22,16 +22,19 @@
 | `final project/doc/guide.md` | 源码目录、配置与读写关系，区分当前文件和可选文件。 |
 | `final project/doc/plan.md` | 八项产品范围、角色、数据与真实合约规则；排除 NFT/QR/汇总等扩展。 |
 | `final project/doc/plan_review_2026-10-28.md` | 实施前可行性与 R01–R15 课程覆盖审核，并附实施后状态更新。 |
+| `final project/handoff/frontend_code_handoff.md` | 代码交接入口：安装运行、源码地图、读写/配置、不变量、metadata、复现、合并与最终验收。 |
 | `final project/handoff/frontend_handoff.md` | ABI 参数/结构/枚举/权限/事件与当前接入说明。 |
 | `final project/handoff/integration_status.md` | 真实进度、角色公钥、部署/RPC/metadata、缺失资料和最终收口。 |
 | `final project/handoff/merge_protocol.md` | 朋友合约/部署、我方前端的分工，隔离目录及安全合并步骤。 |
 | `final project/handoff/repository_review_2026-10-28.md` | 首轮检查历史快照，保留当时构建失败与后续维护补记。 |
 | `final project/submission/README.md` | 交付文件作用、草稿属性、重建环境和最终团队待办。 |
-| `final project/submission/audio_check.log` | 视频音频实测：非静音、max -1.4 dB。 |
+| `final project/submission/audio_check.log` | Karen 配音实测：mean -17.6 dB、max -2.6 dB；新版视频非静音且无满幅削波。 |
+| `final project/submission/document_media_qa.md` | 本次 7 页报告的逐页/字体检查、配音参数与响度、代码不变和交付包检查范围。 |
 | `final project/submission/demo_script.md` | 完整英文旁白脚本，明确本地写入与真实测试网读取。 |
 | `final project/submission/media_decode.log` | 视频完整解码检查，无错误输出时为空。 |
 | `final project/submission/project_report_draft.md` | 可编辑英文报告源文，真实贡献/最终签名证据待补。 |
-| `final project/submission/project_report_draft.pdf` | 4 页英文报告草稿，含原生架构图，逐页渲染检查。 |
+| `final project/submission/project_report_draft.docx` | 可编辑英文报告：A4、12 pt Times New Roman、1.5 行距、封面/页码/图表/参考文献。 |
+| `final project/submission/project_report_draft.pdf` | 从同版 Word 导出，含封面 7 页；逐页检查、Times New Roman 字体已嵌入。 |
 | `final project/submission/submission_manifest.md` | 交付源码指纹、主要文件校验、结果边界与最终待办。 |
 | `final project/test/acceptance/automated-tests.log` | 实际 Node 测试输出：15 通过，保留 Ganache fallback 提示。 |
 | `final project/test/acceptance/browser_acceptance.md` | 实际浏览器/本地链/Sepolia 读取验收、3 个修复问题和未验收边界。 |
@@ -60,7 +63,8 @@
 | `final project/dapp/test/wallet.html`、`wallet.js` | 仅 local-test/loopback 的开发 EIP-1193 账号切换与拒签 harness；不进入生产 bundle。 |
 | `final project/dapp/scripts/local-support.mjs`、`local-chain.mjs` | 使用原源码、Shanghai 目标启动/部署 Ganache；打印公钥、生成忽略的测试配置。 |
 | `final project/dapp/scripts/read-sepolia.mjs` | 只读刷新真实 code/getter/字节码对比与历史日志尝试；不签名。 |
-| `final project/submission/build_report.py`、`build_demo.py` | 报告/英文证据视频重建脚本；后者使用 macOS say 和 FFmpeg。 |
+| `final project/submission/build_report.py`、`build_demo.py` | Markdown→Word 报告与英文证据视频重建；视频默认 Karen 女声、145 words/minute，使用 macOS say/FFmpeg。 |
+| `final project/submission/build_delivery.py` | 干净提交的累计 binary patch、ZIP、回执；验证 patch 的 Git tree 和 ZIP 完整性。 |
 | `.gitignore`、`final project/submission/.gitignore` | 忽略依赖、渲染临时文件、大媒体、patch/ZIP 和生成回执。 |
 | `assignment 3/scripts/`、`assets/`、`remix.config.json` | 原 Assignment 3 合约、素材与配置，不参与本项目运行。 |
 
@@ -74,13 +78,14 @@
 | `final project/test/acceptance/production-browser.json` | 最终生产构建真实 Sepolia record 2 的无钱包 DOM/日志快照。 |
 | `final project/test/acceptance/*.jpg` | 实际浏览器步骤、修复前后、无钱包验证、错误/权限和 390px 截图；具体映射见 browser_acceptance。 |
 | `final project/test/acceptance/recording/frames.json`、`000000.jpg` 至 `000028.jpg` | 修复前问题的 29 个真实 screencast 帧及时间戳。 |
-| `final project/submission/demo_walkthrough_draft.mp4` | 英文合成旁白、实际捕获画面讲解草稿，220.27 秒，1920×1080；单独交付，不提交 Git。 |
+| `final project/submission/demo_walkthrough_draft.mp4` | Karen 温柔英文女声、实际捕获画面讲解草稿，246.88 秒，1920×1080；单独交付，不提交 Git。 |
 | `final project/submission/browser-regression-repro.mp4` | 修复前问题真实帧重放，保留来源并缩短空闲段；单独交付。 |
-| `final project/submission/demo_media_probe.json` | 实际 MP4 音视频格式、分辨率、时长信息。 |
+| `final project/submission/demo_media_probe.json` | 实际 MP4 音视频格式、分辨率、时长，以及女声/语速/混音配置。 |
+| `final project/submission/figures/architecture.svg`、`architecture.png` | 报告架构图的可编辑 SVG 和高分辨率嵌入图，非产品截图。 |
 | `final project/submission/frontend_delivery.patch`、`frontend_delivery.zip`、`delivery_receipt.json` | 打包后生成的独立交接附件/版本/校验记录；不代表远端推送或学校提交。 |
 
 ## 维护与排除
 
-本轮更新了产品计划、执行/审核、目录指南、README、context、接口说明、测试记录和集成状态；新增双人合并协议、实际验收证据、报告/视频草稿及交付清单。原测试 x 与首次核查历史保留。
+本轮更新了产品计划、执行/审核、目录指南、README、context、接口说明、测试记录和集成状态；新增双人合并协议、实际验收证据、报告/视频草稿及交付清单；本次继续维护女声配音、可编辑 Word/同版 PDF、代码交接、格式/媒体验收和可复用打包工具。原测试 x 与首次核查历史保留。
 
 `node_modules`、`dist`、本地 .env/测试钱包状态、`tmp` 和 `submission/media` 为生成内容，不作为源码文档。未包含私人钱包密钥、助记词或 API secret。最终完成状态以 integration_status、browser_acceptance 和 manifest 为准。

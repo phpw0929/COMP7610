@@ -22,7 +22,7 @@ An ordinary database could implement approval, but its operator could control vi
 
 ## 3. Design
 
-The eight agreed features are organization registration, activity creation, volunteer claim submission, approval/rejection, automatic verified-record creation, volunteer history, individual public verification and revocation/correction history. Activity closure and issuer deactivation are lifecycle operations within these features. NFTs, payments, reward tokens, public activity browsing, QR sharing and total-hour dashboards are outside scope.
+The eight agreed features are organization registration, activity creation, volunteer claim submission, approval/rejection, automatic verified-record creation, volunteer history, individual public verification and revocation/correction history. Activity closure and issuer deactivation are lifecycle operations within these features. NFTs, payments, reward tokens, public activity browsing, QR sharing and total-hour dashboards are outside scope. [2]
 
 The contract stores four entities: Organization, Activity, Claim and ServiceRecord. Claims move from Pending to Approved or Rejected once. Approved claims create a Valid record atomically. Valid records may become Corrected, with forward/backward replacement IDs, or Revoked. Corrected and revoked records remain queryable. A claim can stay Approved while its associated record is no longer valid.
 
@@ -30,9 +30,9 @@ Only the administrator registers or changes issuer activity status. Only an acti
 
 ## 4. Implementation
 
-The frontend uses the existing React 19, Vite 7 and Ethers 6 stack, with vanilla CSS. Public queries use JsonRpcProvider. Writes use MetaMask's EIP-1193 connection through BrowserProvider and the selected signer. The interface provides Public verification, My service, Organization and Administration workspaces. Permissions come from the real wallet and contract, not a production role selector.
+The frontend uses the existing React 19, Vite 7 and Ethers 6 stack, with vanilla CSS. [2, 4] Public queries use JsonRpcProvider. Writes use MetaMask's EIP-1193 connection through BrowserProvider and the selected signer. [3] The interface provides Public verification, My service, Organization and Administration workspaces. Permissions come from the real wallet and contract, not a production role selector.
 
-The deployed address reported by the repository is 0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe on Sepolia (chain 11155111). A read-only RPC query confirmed nonempty code, an administrator, one registered but inactive organization, one activity, three claims and four historical records. The runtime executable matches the checked-in build artifact after excluding immutable slots and the CBOR compiler metadata. The full metadata hash differs; this is not Etherscan source verification or a recovered deployment transaction. The public RPC returned pruned-history errors for the required event interval.
+The deployed address reported by the repository is 0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe on Sepolia (chain 11155111). [5] A read-only RPC query confirmed nonempty code, an administrator, one registered but inactive organization, one activity, three claims and four historical records. The runtime executable matches the checked-in build artifact after excluding immutable slots and the CBOR compiler metadata. The full metadata hash differs; this is not Etherscan source verification or a recovered deployment transaction. The public RPC returned pruned-history errors for the required event interval.
 
 Integers use bigint and validated contract ranges. Durations are whole uint32 minutes; dates are UTC date-only input converted to Unix seconds. The interface preserves claimed and approved minutes separately. Successful writes wait for a receipt and extract event IDs, while wallet rejection and pending/failed states remain distinct. Account/network changes invalidate old permissions and outstanding list requests. Successful writes refresh affected data, including a previously verified record, and the UI shows lookup time and a refresh control.
 
@@ -64,9 +64,9 @@ A dishonest recognized issuer can certify false attendance; the contract verifie
 
 ## 8. Contribution distribution and pending completion
 
-The user confirmed a two-party ownership boundary: the friend handles smart contracts/deployment; this assisted work handles the frontend, frontend/local integration tests and documentation. This is a work allocation, not a verified final student contribution table. Student names, IDs, all group members' actual work and the course AI-use policy remain to be supplied and reviewed by the team. The course brief expects a group of four to five; the repository does not establish that roster. No hours or contribution percentages are invented.
+Development responsibilities are divided between smart contracts/deployment and the frontend, local integration tests and documentation. The frontend work was completed with AI assistance. This describes work allocation rather than a verified final student contribution table. Student names, IDs, all group members' actual work and the course AI-use policy remain to be supplied and reviewed by the team. The course brief expects a group of four to five [1]; the repository does not establish that roster. No hours or contribution percentages are invented.
 
-Before final submission, add the real contribution table, confirm platform requirements/deadlines, obtain the final Sepolia wallet demonstration and deployment links, regenerate the final report/video, freeze the integrated commit and retain the group submission receipt. Each student must also complete Peer assignment 04 individually. Neither the report draft nor locally prepared files constitute a course submission.
+Before final submission, add the real contribution table, confirm platform requirements/deadlines, obtain the final Sepolia wallet demonstration and deployment links, regenerate the final report/video, freeze the integrated commit and retain the group submission receipt. Each student must also complete Peer assignment 04 individually. [1] Neither the report draft nor locally prepared files constitute a course submission.
 
 ## References
 

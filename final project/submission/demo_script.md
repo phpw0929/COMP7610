@@ -1,6 +1,6 @@
 # English evidence walkthrough script
 
-Status: development draft. Captured screens with generated English narration; not the final signed Sepolia live demonstration.
+Status: development draft. Captured screens with calm English female narration; not the final signed Sepolia live demonstration.
 
 ## 1. Observed Sepolia records
 
