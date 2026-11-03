@@ -1,6 +1,6 @@
 # Volunteer Service-Hour Verification DApp
 
-This DApp helps recognized organizations approve volunteer service hours and issue records that anyone can verify on the Sepolia testnet. It keeps the approval history visible, including later corrections and revocations.
+This DApp helps recognized organizations approve volunteer service hours and issue records that anyone can verify on the Sepolia testnet. It keeps the approval history visible, including later corrections and revocations. Preview the [DApp](https://phpw0929.github.io/COMP7610/).
 
 The blockchain records wallet actions and service details. It does not independently prove that attendance happened, and a wallet is not legal identity verification.
 
