@@ -1,0 +1,50 @@
+name: Deploy DApp to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "final project/dapp/**"
+      - ".github/workflows/deploy-dapp.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: final project/dapp/package-lock.json
+
+      - run: npm ci
+        working-directory: final project/dapp
+
+      - run: npm run build -- --base=/COMP7610/
+        working-directory: final project/dapp
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: final project/dapp/dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
