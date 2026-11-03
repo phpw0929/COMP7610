@@ -1,111 +1,175 @@
 # Volunteer Service-Hour Verification DApp
 
-An organization reviews volunteer service claims and issues verifiable records. Corrections and revocations preserve history. The app uses React, Vite, Ethers and the existing VolunteerHoursRegistry Solidity contract.
+This DApp helps recognized organizations approve volunteer service hours and issue records that anyone can verify on the Sepolia testnet. It keeps the approval history visible, including later corrections and revocations.
 
-## Current delivery status
+The blockchain records wallet actions and service details. It does not independently prove that attendance happened, and a wallet is not legal identity verification.
 
-Updated 28 October 2026. The frontend implements all eight agreed MVP functions. A clean installation passed **15 automated tests** and the production build. Ordinary browser operation completed **14 successful transactions on a local EVM**, including the entire claim, approval, correction, rejection and lifecycle workflow. Wallet-free **real Sepolia reads** also succeeded.
+## Project structure
 
-These are separate evidence scopes. No new Sepolia wallet transaction was signed in this session. Member identities, the contract owner's deployment transaction, published demo metadata, a fresh signed Sepolia UI demonstration and live course-platform submission remain outstanding. The supplied report and English video are clearly marked **drafts**.
+```text
+final project/
+├── dapp/
+│   ├── artifacts/
+│   ├── contracts/
+│   ├── public/
+│   │   └── metadata/
+│   ├── scripts/
+│   ├── src/
+│   └── test/
+├── doc/
+├── handoff/
+├── submission/
+│   └── figures/
+├── test/
+│   └── acceptance/
+│       └── recording/
+├── AGENTS.md
+└── README.md
+```
 
-- [Document index](../DOCUMENT_INDEX.md)
-- [Product scope](doc/plan.md) and [execution plan](doc/execution_plan.md)
-- [Acceptance results](test/acceptance/browser_acceptance.md), [integration status](handoff/integration_status.md)
-- [Contract interface](handoff/frontend_handoff.md) and [two-person merge protocol](handoff/merge_protocol.md)
-- [Code handoff](handoff/frontend_code_handoff.md): run, maintain, integrate and accept the frontend
-- [Report source](submission/project_report_draft.md), PDF draft and video assets under `submission/`
+- `dapp/` contains the Solidity contract, compiled contract data, React frontend, local-chain scripts, and frontend tests.
+- `dapp/public/metadata/` contains the fictional organization and activity JSON used by the demo.
+- `doc/` contains the product plan, implementation plan, guide, and coursework references.
+- `handoff/` contains frontend integration and contract-use notes for the team.
+- `submission/` contains draft report, figures, media, and delivery materials.
+- `test/acceptance/` contains browser-acceptance evidence and test records.
 
-## Run
+## Setup
 
-Use **Node 24** (tested with 24.19.0). Vite 7 accepts Node `^20.19.0 || >=22.12.0`; this machine's older default 20.11.0 is insufficient. From `final project/dapp`:
+### Development run
 
-```sh
+Install Node.js 24 or another version accepted by the project, then run these commands from `final project/dapp`:
+
+```powershell
 npm ci
 npm run dev
 ```
 
-Open the URL printed by Vite. Defaults already point to the observed Sepolia deployment and a public read-only RPC. No wallet is needed to verify a record. Optional overrides can be set by copying `.env.example` to `.env` before starting Vite:
+Open the local URL printed by Vite, usually `http://localhost:5173`.
 
-```env
-VITE_CONTRACT_ADDRESS=0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe
-VITE_CHAIN_ID=0xaa36a7
-VITE_NETWORK_NAME=Sepolia
-VITE_EXPLORER_URL=https://sepolia.etherscan.io
-VITE_READ_RPC_URL=https://ethereum-sepolia-rpc.publicnode.com
-```
+The frontend reads the configured Sepolia contract. Public verification does not need a wallet. Connecting MetaMask is required for actions that change blockchain state. Use Sepolia and keep private keys and seed phrases out of all frontend files.
 
-All VITE variables are public browser configuration. Never put private keys, seed phrases or server secrets here. If an RPC fails, replace the endpoint with one supporting the intended network and browser CORS, then restart/rebuild. A failed RPC means unavailable verification, not an invalid record.
+### Production preview
 
-Production build and local preview:
+Build and preview the optimized frontend with:
 
-```sh
+```powershell
 npm run build
 npm run preview
 ```
 
-If hosting under a subpath, set the Vite base during build, e.g. `npm run build -- --base=/COMP7610/`. Verify the final origin's RPC/CORS and metadata access. Public website hosting is optional for the course; the required source must be runnable.
+`npm run build` creates the production files in `dapp/dist/`. `npm run preview` serves those files locally. This previews the website; it does not deploy the contract or publish the site.
 
-## Use the workspaces
+## Usage
 
-1. **Public verification:** enter record ID, read on-chain status, issuer, volunteer, minutes/date and linked replacements. Check last lookup time or use Refresh record. Unverified metadata does not hide independently read facts.
-2. **My service:** connect MetaMask, switch to Sepolia, inspect an activity ID, submit whole minutes and a UTC service date, then load personal claims and records.
-3. **Organization:** an active registered issuer creates activities, loads its activity/claim history, approves or rejects pending claims and manages valid records. Approval automatically issues a record. Inactive issuers retain history access but cannot perform new actions.
-4. **Administration:** only the actual administrator registers/activates/deactivates organizations and handles exceptional record correction/revocation.
+The app has four workspaces. Select a tab, then connect MetaMask when the workspace asks for a wallet.
 
-The wallet may have multiple roles. UI checks do not replace contract authorization. Account/network changes invalidate previous permissions. Every write requires the wallet holder's signature and test ETH for gas; the app has no production role selector, embedded private key, fake record fallback, NFT mint or payment flow.
+| Tab                     | Supported Features                                                                                        | What it does                                                                                                                                                       |
+| ----------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Public verification** | <ul><li>Publicly verify an individual</li></ul> record                                                                    | Enter a record ID to read its issuer, volunteer wallet, activity, minutes, date, current status, and correction links. No wallet or transaction is required.       |
+| **My service**          | <ul><li>Submit a service-hour claim;</li> <li>view volunteer history</li></ul>                                                       | Inspect an activity, submit completed minutes, and load your claims and issued records.                                                                            |
+| **Organization**        | <ul><li>Create an activity;</li> <li>approve or reject claims;</li> <li>create verified records;</li> <li>manage corrections and revocations</li></ul> | An active registered organization publishes activities, reviews claims, and corrects or revokes its own records. Approval automatically creates a verified record. |
+| **Administration**      | <ul><li>Register and manage recognized organizations</li></ul>                                                              | The administrator registers organization wallets and activates or deactivates them.                                                                                |
 
-Minutes are positive uint32 integers. IDs retain bigint precision. Dates are Unix seconds mapped from UTC date-only inputs. Claimed and approved durations remain separate. A claim can remain Approved while an associated record is Corrected/Revoked.
+### Typical workflow
 
-## Metadata
+1. The administrator registers an organization.
+2. The organization creates an activity.
+3. A volunteer submits a claim for service hour done.
+4. The organization approves the claim; approval creates a record.
+5. The volunteer loads their history.
+6. Anyone can verify the record by ID.
+7. The organization can create a linked correction or revoke a valid record without deleting its history.
 
-`dapp/public/metadata/organization-demo.json` and `activity-demo.json` are explicitly fictional demo assets. Publish their exact bytes at accessible HTTPS URLs (a pinned public-repository raw URL is suitable), then supply those URLs in the registration/activity forms. The form validates schema and calculates keccak256 from the downloaded bytes. Reads compare exact bytes to the on-chain hash, without reserializing JSON.
+Every write requires MetaMask approval, Sepolia ETH for gas, and a wallet with the correct role. After changing MetaMask accounts or networks, reconnect the wallet in the app.
 
-Organization schema: `schemaVersion:1`, `type:"organization"`, nonempty `name` and `description`. Activity schema: `schemaVersion:1`, `type:"activity"`, nonempty `title`, `description`, `location`. Category/date windows are authoritative contract fields. A public URL alone does not prove truth or integrity. Hashes are not encryption.
+Durations use whole minutes. Date fields represent UTC dates. Claim statuses are `Pending`, `Approved`, and `Rejected`. Record statuses are `Valid`, `Revoked`, and `Corrected`.
 
-The legacy Sepolia records use example.org placeholder metadata, so the UI correctly marks it unavailable/unverified. These historic objects are not silently relabeled with the new demo assets.
+For contract functions, inputs, outputs, and permissions, see [`handoff/frontend_handoff.md`](handoff/frontend_handoff.md).
 
-## Automated and local UI tests
+## Examples and demos
 
-```sh
+Example commands:
+
+```powershell
+cd "final project/dapp"
+npm ci
+npm run dev
+```
+
+Demo video and screenshots: **to be added**.
+
+For a step-by-step DApp test demo, see `test/test_for_demo.md`.
+
+## Development
+
+### Metadata
+
+The demo metadata files are [`organization-demo.json`](dapp/public/metadata/organization-demo.json) and [`activity-demo.json`](dapp/public/metadata/activity-demo.json). They are fictional and contain no personal data.
+
+Publish the organization and activity JSON details at an accessible HTTPS URLs before using them in the organization or activity forms. The frontend checks the JSON schema and calculates a `keccak256` hash from the downloaded bytes. A URL or hash does not prove that the underlying real-world information is true.
+
+Required JSON fields for organization:
+
+```json
+{"schemaVersion":1,"type":"organization","name":"...","description":"..."}
+```
+
+Required JSON fields for activity:
+
+```json
+{"schemaVersion":1,"type":"activity","title":"...","description":"...","location":"..."}
+```
+
+The activity category and date window are stored in the contract. Existing legacy Sepolia records use placeholder `example.org` metadata and may appear as unverified; the app does not replace those old URLs silently.
+
+### Sepolia deployment snapshot
+
+- Chain: `11155111` / `0xaa36a7`
+- Contract: `VolunteerHoursRegistry`
+- Address: `0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe`
+- [Open the contract in Sepolia Etherscan](https://sepolia.etherscan.io/address/0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe)
+- ABI: [`dapp/artifacts/VolunteerHoursRegistry.json`](dapp/artifacts/VolunteerHoursRegistry.json) and [`dapp/src/contract.js`](dapp/src/contract.js)
+- Observed administrator: `0xb3B9ABeF11709509E6cd2424f9A9f744394adc25`
+- Observed issuer: `0xff4e2bAA091080a9b45E3d66D6816FEd65e94599` (inactive)
+- Snapshot: one activity, three claims, and four records. Exact fields are in [`test/acceptance/sepolia-proof.json`](test/acceptance/sepolia-proof.json).
+
+The snapshot is read-only evidence. It does not replace a fresh signed Sepolia demonstration. Do not assume the old activity or record IDs are suitable for a new demo.
+
+### Test
+
+Run the automated contract and domain tests with:
+
+```powershell
 npm test
 ```
 
-The suite executes real Solidity on a fresh Ganache chain and tests input/date/hash/query behavior. Ganache and solc are **development-only** dependencies; the production dependency set remains React, React DOM and Ethers. On Node 24, Ganache can warn that its native uWS binding is unavailable and use a JavaScript fallback; the verified suite still passes. Latest automatic run evidence is local under ignored `.local-test/`; archived acceptance evidence is under `test/acceptance/`.
+These tests use a fresh local Ganache chain and do not change Sepolia.
 
-For the explicit local UI harness, use two terminals:
+For the local browser harness, use two terminals:
 
-```sh
-# Terminal 1: compiles/deploys unchanged source and creates ephemeral local test wallets
+```powershell
+# Terminal 1: start a fresh local EVM and deploy a temporary contract
 npm run test:local
 
-# Terminal 2: reads the generated local-test environment
+# Terminal 2: start the local test UI
 npm run dev:local
 ```
 
-Open **http://127.0.0.1:5184/test/wallet.html**. The yellow toolbar/banner clearly identifies local EVM chain 31337. Select a local test role and reconnect after changing it. Use local metadata URLs such as `http://127.0.0.1:5184/metadata/organization-demo.json`; loopback HTTP is accepted only in local-test mode. The harness supports simulated wallet refusal. No personal wallet keys are used. The normal production build excludes the harness.
+Open `http://127.0.0.1:5184/test/wallet.html`. The harness provides temporary Administrator, Organization, Volunteer, and Unauthorized roles. It uses local chain `31337`, not Sepolia, and its wallets are discarded when the local chain stops.
 
-The local compiler uses Solidity 0.8.34 with Shanghai target for Ganache compatibility. Existing Sepolia artifacts use Osaka and are not overwritten. Restarting the local chain generates fresh wallets/address/IDs; start the frontend only after the chain script writes its state/environment. Stop the local services with Ctrl+C. Test helpers are not a substitute for the final Sepolia live demonstration.
+The full acceptance evidence is in [`test/acceptance/browser_acceptance.md`](test/acceptance/browser_acceptance.md). The original Remix procedure is in [`test/test_procedure.md`](test/test_procedure.md).
 
-Original Remix procedure: [test_procedure.md](test/test_procedure.md). [Historical coverage marks](test/test_overview.md) remain distinct from the new [actual acceptance results](test/acceptance/browser_acceptance.md). T11 delayed/cancelled transactions and every provider outage combination are not fully exercised; lint/typecheck tools are not configured.
+### Current stage and remaining
 
-## Sepolia deployment snapshot
+The frontend implements the eight agreed MVP functions. A clean installation passed 15 automated tests and the production build. Local browser testing completed the claim, approval, correction, rejection, and lifecycle workflows. Wallet-free Sepolia reads also succeeded.
 
-- Chain: `11155111` / `0xaa36a7`
-- Address: `0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe`
-- [Explorer](https://sepolia.etherscan.io/address/0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe)
-- ABI: `dapp/artifacts/VolunteerHoursRegistry.json` and matching `src/contract.js`
-- Observed administrator: `0xb3B9ABeF11709509E6cd2424f9A9f744394adc25`
-- Observed issuer: `0xff4e2bAA091080a9b45E3d66D6816FEd65e94599`, inactive
-- Snapshot: one activity, three claims, four records, historic records corrected/revoked; see `test/acceptance/sepolia-proof.json` for block/time and exact fields.
+These results cover different environments. The remaining work is to:
 
-Executable runtime matches the artifact excluding immutable ranges and compiler metadata; the compiler metadata hash differs. Deployment tx/source verification are not claimed. Historical log retrieval encountered pruned history on the public RPC. Run `node scripts/read-sepolia.mjs` from dapp to refresh the read-only snapshot; it never signs a transaction.
+- prepare a fresh signed Sepolia UI demonstration with controllable demo wallets;
+- publish accessible demo metadata;
+- confirm final deployment provenance and team identities/contributions;
+- update the report and video from draft to final;
+- verify current course-platform requirements and record submission receipts.
 
-The contract teammate must provide final deployment provenance and controllable demo roles. They can reactivate the issuer and create a new activity or supply a new deployment. Do not assume old activity/record ID 1 is usable for the successful workflow. Do not share private keys.
-
-## Delivery and remaining coursework
-
-`submission/` contains the English report Markdown, editable Word and its matching 7-page A4 PDF draft, a captured-screen walkthrough with Karen female narration at 145 words/minute (about 247 seconds), media probes/build scripts and manifest. [Frontend code handoff](handoff/frontend_code_handoff.md) explains setup, source entry points, business invariants, contract integration, merging and remaining final acceptance. The video is 1920×1080 output; source browser captures retain their original detail and are visibly marked as draft evidence. It is not the final signed testnet live-demo recording. Member names/IDs and real contribution attribution are deliberately left for the team.
-
-On 28 October 2026, the frontend delivery was pushed to the repository’s remote `main` using the local Git credentials. The friend’s original worktree remains separately edited; save those changes before integrating the final contract.
-
-Final course delivery still needs the signed testnet demonstration, final report/contribution table, any slides actually made, detailed runnable source, latest portal checks and submission receipts. Each student separately completes Peer assignment 04. The original PDF lists November 8 at 23:59, but live course pages could not be verified here. No course submission occurred.
+The report, video, and delivery files are under [`submission/`](submission/). The frontend integration notes are in [`handoff/frontend_code_handoff.md`](handoff/frontend_code_handoff.md). Product scope is documented in [`doc/plan.md`](doc/plan.md).

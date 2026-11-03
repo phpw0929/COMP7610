@@ -1,4 +1,4 @@
-# Positive Sepolia Demo Test
+# DApp Test Demo
 
 This runbook uses four fresh MetaMask accounts and one newly deployed contract. It covers the main positive workflow. It deliberately skips claim rejection and all negative tests.
 
