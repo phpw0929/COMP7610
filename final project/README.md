@@ -1,6 +1,6 @@
 # Volunteer Service-Hour Verification DApp
 
-This DApp helps recognized organizations approve volunteer service hours and issue records that anyone can verify on the Sepolia testnet. It keeps the approval history visible, including later corrections and revocations.
+This DApp helps recognized organizations approve volunteer service hours and issue records that anyone can verify on the Sepolia testnet. It keeps the approval history visible, including later corrections and revocations. Preview the [DApp](https://phpw0929.github.io/COMP7610/).
 
 The blockchain records wallet actions and service details. It does not independently prove that attendance happened, and a wallet is not legal identity verification.
 
@@ -66,7 +66,7 @@ The app has four workspaces. Select a tab, then connect MetaMask when the worksp
 
 | Tab                     | Supported Features                                                                                        | What it does                                                                                                                                                       |
 | ----------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Public verification** | <ul><li>Publicly verify an individual</li></ul> record                                                                    | Enter a record ID to read its issuer, volunteer wallet, activity, minutes, date, current status, and correction links. No wallet or transaction is required.       |
+| **Public verification** | <ul><li>Publicly verify an individual record</li></ul>                                                                     | Enter a record ID to read its issuer, volunteer wallet, activity, minutes, date, current status, and correction links. No wallet or transaction is required.       |
 | **My service**          | <ul><li>Submit a service-hour claim;</li> <li>view volunteer history</li></ul>                                                       | Inspect an activity, submit completed minutes, and load your claims and issued records.                                                                            |
 | **Organization**        | <ul><li>Create an activity;</li> <li>approve or reject claims;</li> <li>create verified records;</li> <li>manage corrections and revocations</li></ul> | An active registered organization publishes activities, reviews claims, and corrects or revokes its own records. Approval automatically creates a verified record. |
 | **Administration**      | <ul><li>Register and manage recognized organizations</li></ul>                                                              | The administrator registers organization wallets and activates or deactivates them.                                                                                |
