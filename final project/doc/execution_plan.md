@@ -2,7 +2,7 @@
 
 更新日期：2026-10-28。状态：前端已实施；15 项自动测试、本地链 UI 全流程和 Sepolia 只读验证已完成。最终签名测试网流程与课程提交待补。代码基线：`21ad35e`，接口交接：`fc728cb`。
 
-目标是在既定八项 MVP 内完成可运行的志愿服务时长 DApp，并交齐课程要求的代码、README、英文演示和 PDF 报告。产品范围见 [plan.md](plan.md)，逐项要求及可行性审核见 [plan_review_2026-10-28.md](plan_review_2026-10-28.md)，待补资料与执行状态见 [integration_status.md](../handoff/integration_status.md)。
+目标是在既定八项 MVP 内完成可运行的志愿服务时长 DApp，并交齐课程要求的代码、README、英文演示和 PDF 报告。产品范围见 [plan.md](plan.md)，逐项要求及可行性审核见 [plan_review_2026-10-28.md](plan_review_2026-10-28.md)，待补资料与执行状态见 [integration_status.md](handoff/integration_status.md)。
 
 ## 1. 计划基线与完成定义
 

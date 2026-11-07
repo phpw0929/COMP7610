@@ -1,6 +1,6 @@
 # Frontend Handoff: VolunteerHoursRegistry
 
-Updated 2026-10-28. The address below has passed real RPC/browser reads; executable bytecode matches the artifact excluding immutable ranges and compiler metadata. The metadata hash differs; deployment transaction and role control are still pending in [integration_status.md](integration_status.md). See [execution_plan.md](../doc/execution_plan.md) for the frontend and complete coursework delivery plan.
+Updated 2026-10-28. The address below has passed real RPC/browser reads; executable bytecode matches the artifact excluding immutable ranges and compiler metadata. The metadata hash differs; deployment transaction and role control are still pending in [integration_status.md](integration_status.md). See [execution_plan.md](../execution_plan.md) for the frontend and complete coursework delivery plan.
 
 ## Connection data
 
@@ -77,4 +77,4 @@ Returned structs contain:
 
 ## Current execution evidence
 
-The UI, local-EVM lifecycle and 15 automated tests have been implemented and executed; see [browser_acceptance.md](../test/acceptance/browser_acceptance.md). Local signing through a development harness is not live MetaMask/Sepolia acceptance. The existing issuer is inactive and its old activity closed; the contract owner must prepare a new demo activity and accessible metadata. Keep source/ABI stable or apply the [merge protocol](merge_protocol.md) before final verification.
+The UI, local-EVM lifecycle and 15 automated tests have been implemented and executed; see [browser_acceptance.md](../../test/acceptance/browser_acceptance.md). Local signing through a development harness is not live MetaMask/Sepolia acceptance. The existing issuer is inactive and its old activity closed; the contract owner must prepare a new demo activity and accessible metadata. Keep source/ABI stable or apply the [merge protocol](merge_protocol.md) before final verification.

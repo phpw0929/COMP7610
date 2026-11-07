@@ -18,7 +18,7 @@ Updated 28 October 2026. These are reviewable development artifacts, not a confi
 | browser-regression-repro.mp4 | Pre-fix stale-status defect, using 29 real screencast frames; idle gaps capped at 8 seconds |
 | build_delivery.py | Builds cumulative binary Git patch, full ZIP and version/checksum receipt after a clean commit |
 | submission_manifest.md | Frontend fingerprint, file checksums, evidence limits and final dependencies |
-| ../handoff/frontend_code_handoff.md | Code entry points, setup, business invariants, integration and final acceptance handoff |
+| ../doc/handoff/frontend_code_handoff.md | Code entry points, setup, business invariants, integration and final acceptance handoff |
 
 ## Report maintenance
 

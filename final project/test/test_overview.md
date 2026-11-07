@@ -1,6 +1,6 @@
 # Contract Manual Test Coverage
 
-Updated 2026-10-28. Original `x` marks are preserved as historical author marks; their pass/fail legend and supporting execution records were not supplied. This update corrects references, not test outcomes. New verification belongs in [integration_status.md](../handoff/integration_status.md); frontend/E2E cases T01-T14 are in [execution_plan.md](../doc/execution_plan.md). The local artifacts use Solidity 0.8.34 / EVM osaka / optimizer disabled; actual deployment settings remain to be confirmed.
+Updated 2026-10-28. Original `x` marks are preserved as historical author marks; their pass/fail legend and supporting execution records were not supplied. This update corrects references, not test outcomes. New verification belongs in [integration_status.md](../doc/handoff/integration_status.md); frontend/E2E cases T01-T14 are in [execution_plan.md](../doc/execution_plan.md). The local artifacts use Solidity 0.8.34 / EVM osaka / optimizer disabled; actual deployment settings remain to be confirmed.
 
 | Planned feature                                | Contract implementation                                      | Manual test overview                                         | Historical author mark |
 | ---------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------- |

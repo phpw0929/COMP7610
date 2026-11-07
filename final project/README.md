@@ -17,20 +17,20 @@ final project/
 │   ├── src/
 │   └── test/
 ├── doc/
-├── handoff/
+│   ├── course material/
+│   └── handoff/
 ├── submission/
 │   └── figures/
 ├── test/
 │   └── acceptance/
 │       └── recording/
-├── AGENTS.md
 └── README.md
 ```
 
 - `dapp/` contains the Solidity contract, compiled contract data, React frontend, local-chain scripts, and frontend tests.
 - `dapp/public/metadata/` contains the fictional organization and activity JSON used by the demo.
-- `doc/` contains the product plan, implementation plan, guide, and coursework references.
-- `handoff/` contains frontend integration and contract-use notes for the team.
+- `doc/` contains the product plan, implementation plan, guide, coursework PDFs in `course material/`, and team handoff documents in `handoff/`.
+- `doc/handoff/` contains frontend integration and contract-use notes for the team.
 - `submission/` contains draft report, figures, media, and delivery materials.
 - `test/acceptance/` contains browser-acceptance evidence and test records.
 
@@ -85,7 +85,7 @@ Every write requires MetaMask approval, Sepolia ETH for gas, and a wallet with t
 
 Durations use whole minutes. Date fields represent UTC dates. Claim statuses are `Pending`, `Approved`, and `Rejected`. Record statuses are `Valid`, `Revoked`, and `Corrected`.
 
-For contract functions, inputs, outputs, and permissions, see [`handoff/frontend_handoff.md`](handoff/frontend_handoff.md).
+For contract functions, inputs, outputs, and permissions, see [`doc/handoff/frontend_handoff.md`](doc/handoff/frontend_handoff.md).
 
 ## Examples and demos
 
@@ -171,4 +171,4 @@ These results cover different environments. The remaining work is to:
 - update the report and video from draft to final;
 - verify current course-platform requirements and record submission receipts.
 
-The report, video, and delivery files are under [`submission/`](submission/). The frontend integration notes are in [`handoff/frontend_code_handoff.md`](handoff/frontend_code_handoff.md). Product scope is documented in [`doc/plan.md`](doc/plan.md).
+The report, video, and delivery files are under [`submission/`](submission/). The frontend integration notes are in [`doc/handoff/frontend_code_handoff.md`](doc/handoff/frontend_code_handoff.md). Product scope is documented in [`doc/plan.md`](doc/plan.md).

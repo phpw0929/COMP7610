@@ -46,7 +46,7 @@ def main():
     canonical = json.dumps(frontend, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode()
     fingerprint = hashlib.sha256(canonical).hexdigest()
     artifacts = [HERE / name for name in ('project_report_draft.docx', 'project_report_draft.pdf', 'demo_walkthrough_draft.mp4', 'browser-regression-repro.mp4')]
-    artifacts += [ROOT / 'final project/handoff/frontend_code_handoff.md']
+    artifacts += [ROOT / 'final project/doc/handoff/frontend_code_handoff.md']
     manifest = (HERE / 'submission_manifest.md').read_text()
     for path in artifacts:
         if digest(path) not in manifest:
@@ -78,7 +78,7 @@ def main():
         'frontendFingerprintAlgorithm': 'SHA256 of UTF-8 compact sorted-key JSON [{path,sha256}], sorted by repo-relative path, no final newline',
         'contractAndOriginalArtifactsModified': bool(git('diff', '--name-only', BASE, revision, '--', 'final project/dapp/contracts', 'final project/dapp/artifacts').strip()),
         'packagingRun': {'pushedToRemote': False, 'courseSubmitted': False, 'signedSepoliaTransaction': False},
-        'statusDocument': 'final project/handoff/integration_status.md',
+        'statusDocument': 'final project/doc/handoff/integration_status.md',
         'files': {str(path.relative_to(ROOT)): describe(path) for path in [patch, *artifacts]},
         'archiveChecksumNote': 'The receipt inside the ZIP omits the outer archive checksum to avoid circular hashing; the external sibling receipt includes it.',
     }

@@ -1,6 +1,6 @@
 # VolunteerHoursRegistry Manual Contract Test Procedure
 
-Updated 2026-10-28. Source: [VolunteerHoursRegistry.sol](../dapp/contracts/VolunteerHoursRegistry.sol). These are test steps and expected results, not evidence that this update reran them. Historical marks remain in test_overview; new results require actor/date/commit/network/address and logs/transactions in [integration_status.md](../handoff/integration_status.md). Frontend/E2E cases are T01-T14 in [execution_plan.md](../doc/execution_plan.md).
+Updated 2026-10-28. Source: [VolunteerHoursRegistry.sol](../dapp/contracts/VolunteerHoursRegistry.sol). These are test steps and expected results, not evidence that this update reran them. Historical marks remain in test_overview; new results require actor/date/commit/network/address and logs/transactions in [integration_status.md](../doc/handoff/integration_status.md). Frontend/E2E cases are T01-T14 in [execution_plan.md](../doc/execution_plan.md).
 
 The compiled artifacts record Solidity 0.8.34, EVM osaka, optimizer disabled. The previous procedure said 0.8.30. Confirm the actual deployment/settings with the contract owner; this documentation correction does not redeploy or establish what compiler produced the live address. Do not redeploy merely to start frontend integration. Steps below include a fresh deployment option for reproducing tests, which generates a separate address and IDs.
 

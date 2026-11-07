@@ -6,10 +6,10 @@
 
 ## 1. 审核依据与要求层级
 
-1. `Final Project.pdf` 第 2 页：DApp 架构、有意义的链上操作、测试网。
+1. `course material/Final Project.pdf` 第 2 页：DApp 架构、有意义的链上操作、测试网。
 2. 同文件第 3 页：团队视频、PDF 报告、完整可运行源码与 README、可选 slides、个人 Peer assignment 04。
 3. 同文件第 4 页：4–5 人、明确分工和每人贡献；第 5 页：原始日期安排。
-4. `Project Tutorial.pdf`：Ethers/React/MetaMask 技术示例，是实现参考，不把 NFT mint 示例当作本作业必须做 NFT 的要求。
+4. `course material/Project Tutorial.pdf`：Ethers/React/MetaMask 技术示例，是实现参考，不把 NFT mint 示例当作本作业必须做 NFT 的要求。
 5. `plan.md` 与此前项目 context：团队选择的八项 MVP，属于产品验收范围，不是教师给出的八个评分项。
 6. 真实 Solidity、ABI 和 build-info：接入与状态规则的当前实现依据；README 声明或测试表的历史 `x` 不替代运行证据。
 
@@ -35,7 +35,7 @@
 
 ## 3. 课程要求逐项答题情况
 
-“计划覆盖”表示 execution_plan 已安排相应工作与验收，不表示实物完成。当前状态仅按仓库与已知核查证据判断。页码为 `Final Project.pdf` 中的 PDF 页码。
+“计划覆盖”表示 execution_plan 已安排相应工作与验收，不表示实物完成。当前状态仅按仓库与已知核查证据判断。页码为 `course material/Final Project.pdf` 中的 PDF 页码。
 
 | ID | 原始要求/来源 | 计划如何回答 | 当前实际情况 | 最终证明与阶段 |
 | --- | --- | --- | --- | --- |

@@ -14,13 +14,13 @@
 
 | 文档 | 用途 |
 | --- | --- |
-| `../README.md` | 安装、配置、四工作区及测试命令 |
+| `../../README.md` | 安装、配置、四工作区及测试命令 |
 | `frontend_handoff.md` | 完整 ABI、实体字段、状态枚举、事件及权限；本文件不复制这张接口表 |
 | `integration_status.md` | 当前部署、公开钱包地址、metadata 和待补材料 |
 | `merge_protocol.md` | 双方文件所有权与冲突处理 |
-| `../test/acceptance/browser_acceptance.md` | 已验收操作、问题修复和未覆盖边界 |
-| `../submission/README.md` | Word/PDF、配音视频和交接包的维护方式 |
-| `../../DOCUMENT_INDEX.md` | 全部文档和证据的索引 |
+| `../../test/acceptance/browser_acceptance.md` | 已验收操作、问题修复和未覆盖边界 |
+| `../../submission/README.md` | Word/PDF、配音视频和交接包的维护方式 |
+| `../../../DOCUMENT_INDEX.md` | 全部文档和证据的索引 |
 
 ## 2. 安装与运行
 

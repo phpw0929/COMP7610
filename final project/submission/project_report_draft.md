@@ -70,8 +70,8 @@ Before final submission, add the real contribution table, confirm platform requi
 
 ## References
 
-1. Course materials: doc/Final Project.pdf, pages 2-5; doc/Project Tutorial.pdf.
-2. Project: doc/plan.md; doc/execution_plan.md; handoff/frontend_handoff.md; dapp/contracts/VolunteerHoursRegistry.sol.
+1. Course materials: doc/course material/Final Project.pdf, pages 2-5; doc/course material/Project Tutorial.pdf.
+2. Project: doc/plan.md; doc/execution_plan.md; doc/handoff/frontend_handoff.md; dapp/contracts/VolunteerHoursRegistry.sol.
 3. Ethers v6: https://docs.ethers.org/v6/getting-started/ and https://docs.ethers.org/v6/api/providers/jsonrpc/.
 4. Vite 7 runtime requirements: https://v7.vite.dev/guide/migration.
 5. Sepolia contract: https://sepolia.etherscan.io/address/0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe.

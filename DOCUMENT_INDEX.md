@@ -4,6 +4,8 @@
 
 当前已实现前端并完成主要本地验收和真实 Sepolia 读取；前端交付已于 2026-10-28 快进推送远端 `main` 并核对 SHA。报告/视频为草稿，最终测试网签名、组员身份和课程提交待补。本次已更新 Karen 女声配音、含封面 7 页的正式版式 Word/PDF 与前端代码交接。文档新增、移动或修改时必须同步本索引。
 
+目录更新（2026-11-08）：交接文档已移至 `final project/doc/handoff/`；`final project/AGENTS.md` 和 `final project/.codex/` 已删除。
+
 ## 文档和记录
 
 | 路径 | 功能 |
@@ -12,27 +14,26 @@
 | `README.md` | 课程仓库入口，指向 Final Project 运行说明与本总索引。 |
 | `assignment 3/README.md` | Assignment 3 的原有说明，与 Final Project 分开。 |
 | `assignment 3/debug.log` | Assignment 3 历史调试记录，不作为本项目验收证据。 |
-| `final project/.codex/context.md` | 最新实施交接上下文：源码阶段、责任边界、已验证结果及剩余条件。 |
-| `final project/AGENTS.md` | 项目协作与实施规则；保留原文。 |
 | `final project/README.md` | 当前可运行前端、配置、四工作区、测试命令、部署快照与交付边界。 |
 | `final project/doc/DApp_idea.xlsx` | 早期选题比较资料，本轮未重新分析或修改。 |
-| `final project/doc/Final Project.pdf` | 课程原始正式要求和日期；最新平台通知尚未核对。 |
-| `final project/doc/Project Tutorial.pdf` | React/Ethers/MetaMask 课程教程；NFT 示例不等于产品需求。 |
+| `final project/doc/course material/Final Project.pdf` | 课程原始正式要求和日期；最新平台通知尚未核对。 |
+| `final project/doc/course material/Project Tutorial.pdf` | React/Ethers/MetaMask 课程教程；NFT 示例不等于产品需求。 |
 | `final project/doc/execution_plan.md` | 完整 G0–G7 计划、M1–M8、T01–T14、排期及实施补记。 |
 | `final project/doc/guide.md` | 源码目录、配置与读写关系，区分当前文件和可选文件。 |
 | `final project/doc/plan.md` | 八项产品范围、角色、数据与真实合约规则；排除 NFT/QR/汇总等扩展。 |
 | `final project/doc/plan_review_2026-10-28.md` | 实施前可行性与 R01–R15 课程覆盖审核，并附实施后状态更新。 |
-| `final project/handoff/frontend_code_handoff.md` | 代码交接入口：安装运行、源码地图、读写/配置、不变量、metadata、复现、合并与最终验收。 |
-| `final project/handoff/frontend_handoff.md` | ABI 参数/结构/枚举/权限/事件与当前接入说明。 |
-| `final project/handoff/integration_status.md` | 真实进度、角色公钥、部署/RPC/metadata、缺失资料和最终收口。 |
-| `final project/handoff/merge_protocol.md` | 朋友合约/部署、我方前端的分工，隔离目录及安全合并步骤。 |
-| `final project/handoff/repository_review_2026-10-28.md` | 首轮检查历史快照，保留当时构建失败与后续维护补记。 |
+| `final project/doc/handoff/frontend_code_handoff.md` | 代码交接入口：安装运行、源码地图、读写/配置、不变量、metadata、复现、合并与最终验收。 |
+| `final project/doc/handoff/frontend_handoff.md` | ABI 参数/结构/枚举/权限/事件与当前接入说明。 |
+| `final project/doc/handoff/integration_status.md` | 真实进度、角色公钥、部署/RPC/metadata、缺失资料和最终收口。 |
+| `final project/doc/handoff/merge_protocol.md` | 朋友合约/部署、我方前端的分工，隔离目录及安全合并步骤。 |
+| `final project/doc/handoff/repository_review_2026-10-28.md` | 首轮检查历史快照，保留当时构建失败与后续维护补记。 |
 | `final project/submission/README.md` | 交付文件作用、草稿属性、重建环境和最终团队待办。 |
 | `final project/submission/audio_check.log` | Karen 配音实测：mean -17.6 dB、max -2.6 dB；新版视频非静音且无满幅削波。 |
 | `final project/submission/document_media_qa.md` | 本次 7 页报告的逐页/字体检查、配音参数与响度、代码不变和交付包检查范围。 |
 | `final project/submission/demo_script.md` | 完整英文旁白脚本，明确本地写入与真实测试网读取。 |
 | `final project/submission/media_decode.log` | 视频完整解码检查，无错误输出时为空。 |
 | `final project/submission/project_report_draft.md` | 可编辑英文报告源文，真实贡献/最终签名证据待补。 |
+| `final project/submission/presentation_plan.md` | 12 页演示计划、逐页内容与整体配色、版式和字体建议。 |
 | `final project/submission/project_report_draft.docx` | 可编辑英文报告：A4、12 pt Times New Roman、1.5 行距、封面/页码/图表/参考文献。 |
 | `final project/submission/project_report_draft.pdf` | 从同版 Word 导出，含封面 7 页；逐页检查、Times New Roman 字体已嵌入。 |
 | `final project/submission/submission_manifest.md` | 交付源码指纹、主要文件校验、结果边界与最终待办。 |
@@ -44,6 +45,7 @@
 | `final project/test/acceptance/recording/encode.log` | 问题重放视频实际编码日志。 |
 | `final project/test/test_overview.md` | 原手工覆盖与历史 x；保留标记，链接新验收结果。 |
 | `final project/test/test_procedure.md` | 校正后的 Remix 复测步骤、预期及证据要求，不冒充本轮全部重测。 |
+| `final project/test/test_for_demo.md` | 四个新账户的 Sepolia 正向演示步骤、输入、预期输出与后续保留值。 |
 
 ## 源码与配置入口
 

@@ -29,7 +29,7 @@
 
 ## 交接与源码边界
 
-新增 `handoff/frontend_code_handoff.md`，覆盖运行、源码地图、读写路径、配置、关键不变量、metadata、本地复现、累计 patch 合并、合约方资料和故障排查。同步 README、guide、计划/审核补记、集成状态、context、manifest 与总索引。
+新增 `doc/handoff/frontend_code_handoff.md`，覆盖运行、源码地图、读写路径、配置、关键不变量、metadata、本地复现、累计 patch 合并、合约方资料和故障排查。同步 README、guide、计划/审核补记、集成状态、context、manifest 与总索引。
 
 使用 `git diff f2e4d32 -- 'final project/dapp'` 确认 25 个前端/配置/原始产物文件字节一致。本次不重复宣称进行了新一轮链上或浏览器业务测试；此前 15 个自动化测试和 14 笔本地 UI 成功交易的证据保持原样。
 

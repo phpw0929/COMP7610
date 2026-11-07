@@ -12,13 +12,15 @@
 
 ## 交付文件与 SHA256
 
+以下大小和 SHA256 是 2026-10-28 原交付版本的记录，不代表本轮路径更新后的文件校验值；路径按当前目录结构列出。
+
 | 文件 | 大小 bytes | SHA256 |
 | --- | --- | --- |
 | `final project/submission/project_report_draft.docx` | 239901 | `5cd4abd446a36aceb91ef45f169cb4306798dfa812c6d2c21b868611d038780f` |
 | `final project/submission/project_report_draft.pdf` | 381475 | `6610d5258c681487e7ea7580bfc4b1eb2693e7f7519cffcbc2e1e4c6a1540a55` |
 | `final project/submission/demo_walkthrough_draft.mp4` | 17488030 | `2199a93ec92fb7c6bdc80c71249e06a9293db93acff58e93a746586954791b51` |
 | `final project/submission/browser-regression-repro.mp4` | 297561 | `c78b3275b2b6454dc12d3ad5233e45d05ca326db01bd974b209b0ff88824b7dc` |
-| `final project/handoff/frontend_code_handoff.md` | 13218 | `1e476821772fa61aeb04ea4bb662dee12f75ca1548a07e2c322619db149e1de6` |
+| `final project/doc/handoff/frontend_code_handoff.md` | 13218 | `1e476821772fa61aeb04ea4bb662dee12f75ca1548a07e2c322619db149e1de6` |
 | `final project/test/acceptance/local-browser-ledger.json` | 15435 | `acb8b3887cf0ebcc62f301f3b9bec6186663bed583b6b1212b443caa2b29bd00` |
 | `final project/test/acceptance/sepolia-proof.json` | 6052 | `333d0fbb8aec21fefac66ab851cf16af07dbf309b3716f635bf5a6ff672eb5e8` |
 
@@ -40,6 +42,6 @@
 3. 填写完整成员姓名/学号/实际贡献，核对课程政策、截止与入口，完成报告/视频定稿。
 4. 集成负责人复核最终仓库版本、提交团队文件；每人完成 Peer assignment 04，保留各自回执。
 
-2026-10-28 本机 Git 凭据已成功将前端交付推送到远端 `main`，并核对远端 SHA；这不是学校提交。运行/维护/对接入口见 handoff/frontend_code_handoff.md，合并分工见 handoff/merge_protocol.md；本地 commit/patch 作为交接，不覆盖朋友未提交内容。
+2026-10-28 本机 Git 凭据已成功将前端交付推送到远端 `main`，并核对远端 SHA；这不是学校提交。运行/维护/对接入口见 doc/handoff/frontend_code_handoff.md，合并分工见 doc/handoff/merge_protocol.md；本地 commit/patch 作为交接，不覆盖朋友未提交内容。
 
 交付包维护：先更新正文、媒体、manifest 与总索引并提交，再运行 submission/build_delivery.py。累计 patch 从 21ad35e 到交付 HEAD，覆盖完整前端与本次文档修订；临时 index 的 tree 校验和 ZIP CRC/文件集合校验通过后才生成最终回执。ZIP 内回执不包含外层 ZIP 自身哈希，外侧回执包含。

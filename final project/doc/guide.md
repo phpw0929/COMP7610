@@ -7,22 +7,22 @@ Updated: 2026-10-28. The VolunteerHoursRegistry contract and integration ABI exi
 Paths below are relative to `final project/`. `planned` entries do not exist yet.
 
 ```text
-AGENTS.md                         Project workflow rules
 README.md                         Current status and setup
-.codex/context.md                 Scope and latest handoff context
 doc/
   plan.md                         Product definition and eight-feature scope
   execution_plan.md               Stages G0-G7, tests T01-T14, delivery plan
   plan_review_2026-10-28.md        Feasibility and course-requirements review
   guide.md                        This guide
-  Final Project.pdf               Formal coursework brief
-  Project Tutorial.pdf            Technical tutorial
+  course material/
+    Final Project.pdf               Formal coursework brief
+    Project Tutorial.pdf            Technical tutorial
   DApp_idea.xlsx                  Earlier idea comparison
-handoff/
-  frontend_handoff.md             Contract function and data reference
-  integration_status.md           Real dependencies, milestones and evidence
-  merge_protocol.md               Contract/frontend ownership and safe integration
-  repository_review_2026-10-28.md  Initial repository inspection snapshot
+  handoff/
+    frontend_code_handoff.md       Frontend setup and code maintenance reference
+    frontend_handoff.md            Contract function and data reference
+    integration_status.md          Real dependencies, milestones and evidence
+    merge_protocol.md              Contract/frontend ownership and safe integration
+    repository_review_2026-10-28.md Initial repository inspection snapshot
 test/
   test_overview.md                 Historical manual coverage table
   test_procedure.md                Remix test procedure and expected values
@@ -47,7 +47,7 @@ dapp/
 submission/                       Report/video drafts, build scripts and manifest
 ```
 
-The repository-wide document index is `../DOCUMENT_INDEX.md`. Keep it synchronized whenever a document is added, moved or updated. Source files under `assignment 3/` are a separate assignment, not contracts or assets to copy into this DApp.
+The repository-wide document index is [DOCUMENT_INDEX.md](../../DOCUMENT_INDEX.md). Keep it synchronized whenever a document is added, moved or updated. Source files under `assignment 3/` are a separate assignment, not contracts or assets to copy into this DApp.
 
 ## 2. Runtime relationships
 
@@ -88,4 +88,4 @@ Final delivery includes runnable source and detailed README, a PDF report, and a
 
 Ganache and solc are development-only dependencies for real local-EVM tests; runtime dependencies are unchanged. dapp/scripts/local-chain.mjs deploys unchanged source to an ephemeral local chain and writes ignored test state; npm run dev:local exposes the explicitly labeled test harness on port 5184. Test outputs are not proof of new Sepolia signing.
 
-submission/build_report.py uses Python/python-docx to generate editable Word from the report Markdown; export that Word to PDF and inspect every page. build_demo.py uses macOS say (default Karen female voice, 145 words/minute), FFmpeg and ffprobe. build_delivery.py packages a clean committed revision and verifies that its cumulative patch reproduces the Git tree. Temporary render/media folders are ignored. Detailed setup, source ownership, invariants, troubleshooting and final integration are in handoff/frontend_code_handoff.md; rebuild steps are in submission/README.md.
+submission/build_report.py uses Python/python-docx to generate editable Word from the report Markdown; export that Word to PDF and inspect every page. build_demo.py uses macOS say (default Karen female voice, 145 words/minute), FFmpeg and ffprobe. build_delivery.py packages a clean committed revision and verifies that its cumulative patch reproduces the Git tree. Temporary render/media folders are ignored. Detailed setup, source ownership, invariants, troubleshooting and final integration are in doc/handoff/frontend_code_handoff.md; rebuild steps are in submission/README.md.
