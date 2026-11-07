@@ -1,6 +1,6 @@
 # Volunteer Service-Hour Verification DApp
 
-This DApp helps recognized organizations approve volunteer service hours and issue records that anyone can verify on the Sepolia testnet. It keeps the approval history visible, including later corrections and revocations. Preview the [DApp](https://phpw0929.github.io/COMP7610/).
+This DApp helps recognized organizations approve volunteer service hours and issue records that anyone can verify on the Sepolia testnet. It keeps the approval history visible, including later corrections and revocations. Preview the DApp [here](https://volunteer-service-hour-verification.pages.dev/).
 
 The blockchain records wallet actions and service details. It does not independently prove that attendance happened, and a wallet is not legal identity verification.
 
@@ -127,12 +127,11 @@ The activity category and date window are stored in the contract. Existing legac
 
 - Chain: `11155111` / `0xaa36a7`
 - Contract: `VolunteerHoursRegistry`
-- Address: `0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe`
-- [Open the contract in Sepolia Etherscan](https://sepolia.etherscan.io/address/0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe)
+- Address: `0x2c5ff98D1a6c68a91769Ab82B37cD9B2faA534E0`
+- [Open the contract in Sepolia Etherscan](https://sepolia.etherscan.io/address/0x2c5ff98D1a6c68a91769Ab82B37cD9B2faA534E0)
 - ABI: [`dapp/artifacts/VolunteerHoursRegistry.json`](dapp/artifacts/VolunteerHoursRegistry.json) and [`dapp/src/contract.js`](dapp/src/contract.js)
-- Observed administrator: `0xb3B9ABeF11709509E6cd2424f9A9f744394adc25`
-- Observed issuer: `0xff4e2bAA091080a9b45E3d66D6816FEd65e94599` (inactive)
-- Snapshot: one activity, three claims, and four records. Exact fields are in [`test/acceptance/sepolia-proof.json`](test/acceptance/sepolia-proof.json).
+- Observed administrator: `0x4b452a45611EF1CB4Bb4c96324B6677410E85B37`
+- Observed issuer: `0x40afC0D58b2fd1f7b5B23C1C66D333d0D9B72ef6`
 
 The snapshot is read-only evidence. It does not replace a fresh signed Sepolia demonstration. Do not assume the old activity or record IDs are suitable for a new demo.
 
