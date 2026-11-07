@@ -125,7 +125,7 @@ The activity category and date window are stored in the contract. Existing legac
 
 ### Sepolia deployment snapshot
 
-- Chain: `11155111` / `0xaa36a7`
+- Chain: `12070136` / `0xaa36a7`
 - Contract: `VolunteerHoursRegistry`
 - Address: `0x2c5ff98D1a6c68a91769Ab82B37cD9B2faA534E0`
 - [Open the contract in Sepolia Etherscan](https://sepolia.etherscan.io/address/0x2c5ff98D1a6c68a91769Ab82B37cD9B2faA534E0)
