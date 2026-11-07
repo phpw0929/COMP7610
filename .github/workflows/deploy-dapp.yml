@@ -42,7 +42,7 @@ jobs:
   deploy:
     environment:
       name: DApp entry
-      url: https://volunteer-service-hour-verification.pages.dev/
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
