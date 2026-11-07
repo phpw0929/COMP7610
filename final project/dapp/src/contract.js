@@ -1,6 +1,6 @@
 const env = import.meta.env ?? {};
 
-export const CONTRACT_ADDRESS = env.VITE_CONTRACT_ADDRESS ?? "0xf1a55E316439a99Cd904E131e0f889E4D36D7DEe";
+export const CONTRACT_ADDRESS = env.VITE_CONTRACT_ADDRESS ?? "0x2c5ff98D1a6c68a91769Ab82B37cD9B2faA534E0";
 
 export const READ_RPC_URL = env.VITE_READ_RPC_URL ?? "https://ethereum-sepolia-rpc.publicnode.com";
 
